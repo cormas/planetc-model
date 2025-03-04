@@ -5,7 +5,8 @@ Class {
 		'biomass',
 		'isProtected',
 		'unvisitedCounter',
-		'numberOfNewborns'
+		'numberOfNewborns',
+		'image'
 	],
 	#category : 'PlanetC-Model',
 	#package : 'PlanetC-Model'
@@ -54,6 +55,12 @@ PCCell >> povBirds [
 	color := self colorAttribute: #numberOfNewborns min: 0  max: 2 color: CMColor gold. 
 	^ CMPointOfView 
 		color: color
+]
+
+{ #category : 'accessing' }
+PCCell >> povBoard [
+	<pov>
+	^ CMPointOfView image: image
 ]
 
 { #category : 'accessing' }
@@ -108,4 +115,10 @@ PCCell >> updateUnvisitedCounter [
 	unvisitedCounter := self hasHarvesters
 		                    ifTrue: [ 0 ]
 		                    ifFalse: [ unvisitedCounter + 1 ].
+]
+
+{ #category : 'as yet unclassified' }
+PCCell >> useImage: aForm [
+
+	image := aForm
 ]

@@ -37,15 +37,24 @@ PCModel >> harvesters [
 PCModel >> initStandard [
 	<init>
 	self createGridNumberOfRows: 4 
-	numberOfColumns: 5 
-	neighbourhood: 8 
-	closed: true.
+		numberOfColumns: 5 
+		neighbourhood: 8 
+		closed: true.
+		
+	self initializeCellImages.
 ]
 
 { #category : 'initialization' }
 PCModel >> initialize [ 
 	super initialize.
 	cells := OrderedCollection new.
+]
+
+{ #category : 'initialization' }
+PCModel >> initializeCellImages [
+
+	cells withIndexDo: [ :cell :index | 
+		cell useImage: (PCImages cells at: index) ]
 ]
 
 { #category : 'initialization' }
