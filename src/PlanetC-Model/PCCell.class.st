@@ -5,7 +5,8 @@ Class {
 		'biomass',
 		'isProtected',
 		'unvisitedCounter',
-		'numberOfNewborns'
+		'numberOfNewborns',
+		'image'
 	],
 	#category : 'PlanetC-Model',
 	#package : 'PlanetC-Model'
@@ -19,30 +20,6 @@ PCCell >> biomass [
 { #category : 'accessing' }
 PCCell >> biomass: newBiomass [
 	biomass := newBiomass.
-]
-
-{ #category : 'accessing' }
-PCCell >> biomassGrow [
-
-	| harvesters sumOfHBiomes |
-	harvesters := self occupantsOfClass: PCHarvester.
-	sumOfHBiomes := 0.
-	harvesters isEmpty ifTrue: [
-		self unvisitedCounter = 1 ifTrue: [ biomass := biomass + 1 ].
-		self unvisitedCounter >= 3 ifTrue: [self biomassShrink] ].
-	harvesters size = 1 ifTrue: [ "to implement" ].
-
-	harvesters size > 1 ifFalse: [ ^ self ].
-	sumOfHBiomes := harvesters sum: [ :harvester |
-		                harvester harvestedBiomes ].
-	sumOfHBiomes = 3 ifTrue: [ biomass := biomass + 1 ]
-]
-
-{ #category : 'accessing' }
-PCCell >> biomassShrink [
-	<action>
-	biomass > 0 
-		ifTrue: [biomass := biomass - 1].
 ]
 
 { #category : 'accessing' }
@@ -68,10 +45,7 @@ PCCell >> numberOfNewborns [
 { #category : 'accessing' }
 PCCell >> pov [ 
 	<pov>
-	| color | 
-	color := self colorAttribute: #biomass min: 0  max: 3 "add logic behind it" color: CMColor green. 
-	^ CMPointOfView 
-		color: color
+	^ CMPointOfView color: (PCColor biomassColors at: biomass + 1)
 ]
 
 { #category : 'accessing' }
@@ -84,9 +58,15 @@ PCCell >> povBirds [
 ]
 
 { #category : 'accessing' }
+PCCell >> povBoard [
+	<pov>
+	^ CMPointOfView image: image
+]
+
+{ #category : 'accessing' }
 PCCell >> step [
 	self updateUnvisitedCounter.
-	self biomassGrow.
+	self updateBiomass.
 	self updateNewbornBirds.
 ]
 
@@ -94,6 +74,23 @@ PCCell >> step [
 PCCell >> unvisitedCounter [
 
 	^ unvisitedCounter 
+]
+
+{ #category : 'accessing' }
+PCCell >> updateBiomass [
+
+	| harvesters sumOfHBiomes |
+	harvesters := self occupantsOfClass: PCHarvester.
+	sumOfHBiomes := 0.
+	harvesters isEmpty ifTrue: [
+		self unvisitedCounter = 1 ifTrue: [ biomass := 3 min: biomass + 1 ].
+		self unvisitedCounter >= 3 ifTrue: [ biomass := 0 max: biomass - 1 ] ].
+	harvesters size = 1 ifTrue: [ "to implement" ].
+
+	harvesters size > 1 ifFalse: [ ^ self ].
+	sumOfHBiomes := harvesters sum: [ :harvester |
+		                harvester harvestedBiomes ].
+	sumOfHBiomes = 3 ifTrue: [ biomass := biomass + 1 ]
 ]
 
 { #category : 'accessing' }
@@ -123,4 +120,10 @@ PCCell >> updateUnvisitedCounter [
 	unvisitedCounter := self hasHarvesters
 		                    ifTrue: [ 0 ]
 		                    ifFalse: [ unvisitedCounter + 1 ].
+]
+
+{ #category : 'as yet unclassified' }
+PCCell >> useImage: aForm [
+
+	image := aForm
 ]
