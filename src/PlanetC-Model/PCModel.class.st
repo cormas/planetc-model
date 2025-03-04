@@ -30,7 +30,7 @@ PCModel >> cells [
 { #category : 'initialization' }
 PCModel >> harvesters [
 	<getterFor: #PCHarvester >
-	^ cells 
+	^ harvesters 
 ]
 
 { #category : 'initialization' }
@@ -48,6 +48,7 @@ PCModel >> initStandard [
 PCModel >> initialize [ 
 	super initialize.
 	cells := OrderedCollection new.
+	harvesters := OrderedCollection new
 ]
 
 { #category : 'initialization' }
