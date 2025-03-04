@@ -62,7 +62,7 @@ PCCell >> povBirds [
 { #category : 'accessing' }
 PCCell >> step [
 	self updateUnvisitedCounter.
-	self biomassGrow.
+	self updateBiomass.
 	self updateNewbornBirds.
 ]
 
