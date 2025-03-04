@@ -28,21 +28,14 @@ PCCell >> biomassGrow [
 	harvesters := self occupantsOfClass: PCHarvester.
 	sumOfHBiomes := 0.
 	harvesters isEmpty ifTrue: [
-		self unvisitedCounter = 1 ifTrue: [ biomass := biomass + 1 ].
-		self unvisitedCounter >= 3 ifTrue: [self biomassShrink] ].
+		self unvisitedCounter = 1 ifTrue: [ biomass := 3 min: biomass + 1 ].
+		self unvisitedCounter >= 3 ifTrue: [ biomass := 0 max: biomass - 1 ] ].
 	harvesters size = 1 ifTrue: [ "to implement" ].
 
 	harvesters size > 1 ifFalse: [ ^ self ].
 	sumOfHBiomes := harvesters sum: [ :harvester |
 		                harvester harvestedBiomes ].
 	sumOfHBiomes = 3 ifTrue: [ biomass := biomass + 1 ]
-]
-
-{ #category : 'accessing' }
-PCCell >> biomassShrink [
-	<action>
-	biomass > 0 
-		ifTrue: [biomass := biomass - 1].
 ]
 
 { #category : 'accessing' }
