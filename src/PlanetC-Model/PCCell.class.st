@@ -44,10 +44,7 @@ PCCell >> numberOfNewborns [
 { #category : 'accessing' }
 PCCell >> pov [ 
 	<pov>
-	| color | 
-	color := self colorAttribute: #biomass min: 0  max: 3 "add logic behind it" color: CMColor green. 
-	^ CMPointOfView 
-		color: color
+	^ CMPointOfView color: (PCColor biomassColors at: biomass + 1)
 ]
 
 { #category : 'accessing' }
