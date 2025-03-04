@@ -3,7 +3,8 @@ Class {
 	#superclass : 'TestCase',
 	#instVars : [
 		'model',
-		'cell'
+		'cell',
+		'harvester'
 	],
 	#category : 'PlanetC-Model-Test',
 	#package : 'PlanetC-Model-Test'
@@ -22,6 +23,7 @@ PCCellTest >> setUp [
 		closed: true.
 		
 	cell := model cellAt: 2 at: 3.
+	harvester := model newEntity: PCHarvester.
 	
 ]
 
@@ -69,6 +71,12 @@ PCCellTest >> testNumberOfNewborns [
 ]
 
 { #category : 'tests' }
+PCCellTest >> testPov [ 
+
+	self assert: cell pov class equals: CMPointOfView 
+]
+
+{ #category : 'tests' }
 PCCellTest >> testStep [ 
 	
 	cell biomass: 3.
@@ -77,6 +85,23 @@ PCCellTest >> testStep [
 	self assert: cell biomass equals: 3.
 	self assert: cell numberOfNewborns equals: 2.
 	self assert: cell unvisitedCounter equals: 1.
+
+]
+
+{ #category : 'tests' }
+PCCellTest >> testStepWithHarvester [
+	
+	harvester moveTo: cell.
+	cell biomass: 3.
+	cell step.
+	cell step. 
+	cell step.
+	cell step.
+	cell step. 
+	
+	self assert: cell biomass equals: 3.
+	self assert: cell numberOfNewborns equals: 0.
+	self assert: cell unvisitedCounter equals: 0.
 
 ]
 
@@ -99,6 +124,15 @@ PCCellTest >> testUpdateNewbornBirds [
 	
 	cell updateNewbornBirds.
 	self assert: cell numberOfNewborns > 0.
+	
+]
+
+{ #category : 'tests' }
+PCCellTest >> testUpdateNewbornBirdsWithHarvester [
+	
+	harvester moveTo: cell.
+	cell updateNewbornBirds.
+	self assert: cell numberOfNewborns equals: 0.
 	
 ]
 
