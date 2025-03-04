@@ -18,3 +18,12 @@ PCHarvester >> harvestedBiomes [
 { #category : 'initialization' }
 PCHarvester >> initialize [ 
 ]
+
+{ #category : 'initialization' }
+PCHarvester >> pov [
+    <pov>
+    ^ CMPointOfView
+        color: CMColor blue
+        shape: #star
+        size: 0.6
+]
