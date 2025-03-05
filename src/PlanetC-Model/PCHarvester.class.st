@@ -17,6 +17,14 @@ PCHarvester >> harvestedBiomes [
 
 { #category : 'initialization' }
 PCHarvester >> initialize [ 
+	super initialize.
+]
+
+{ #category : 'initialization' }
+PCHarvester >> moveRandomly [
+    <action>
+    self randomWalkConstrainedBy: [ :cell |
+        (cell hasOccupantsOfClass: self class) not ]
 ]
 
 { #category : 'initialization' }
@@ -26,4 +34,10 @@ PCHarvester >> pov [
         color: CMColor blue
         shape: #star
         size: 0.6
+]
+
+{ #category : 'initialization' }
+PCHarvester >> step [ 
+	
+	self moveRandomly.
 ]

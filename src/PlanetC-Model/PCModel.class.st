@@ -42,6 +42,7 @@ PCModel >> initStandard [
 		closed: true.
 		
 	self initializeCellImages.
+	self createN: 2 randomlyLocatedAloneEntities: PCHarvester.
 ]
 
 { #category : 'initialization' }
@@ -74,4 +75,5 @@ PCModel >> step [
 	<control>
 	
 	self cells do: [:cell | cell step].
+	self harvesters do: [:harvester | harvester step ].
 ]
