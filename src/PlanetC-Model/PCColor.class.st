@@ -34,3 +34,45 @@ PCColor class >> biomassColors [
 	<script: 'self biomassColors inspect'>
 	^ { self biomass0 . self biomass1 . self biomass2 . self biomass3 }
 ]
+
+{ #category : 'as yet unclassified' }
+PCColor class >> bluePiece [
+	<script: 'self bluePiece inspect'>
+	^ Color blue
+]
+
+{ #category : 'as yet unclassified' }
+PCColor class >> greenPiece [
+	<script: 'self greenPiece inspect'>
+	^ Color green
+]
+
+{ #category : 'accessing' }
+PCColor class >> pieces [
+	<script: 'self pieces inspect'>
+	^ { 
+		#red -> self redPiece .
+		#green -> self greenPiece .
+		#blue -> self bluePiece .
+		#yellow -> self pinkPiece .
+		#pink -> self pinkPiece .
+	} asDictionary
+]
+
+{ #category : 'as yet unclassified' }
+PCColor class >> pinkPiece [
+	<script: 'self pinkPiece inspect'>
+	^ Color pink
+]
+
+{ #category : 'as yet unclassified' }
+PCColor class >> redPiece [
+	<script: 'self redPiece inspect'>
+	^ Color red
+]
+
+{ #category : 'as yet unclassified' }
+PCColor class >> yellowPiece [
+	<script: 'self yellowPiece inspect'>
+	^ Color yellow
+]
