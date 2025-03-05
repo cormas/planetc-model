@@ -15,7 +15,7 @@ PCCellTest >> setUp [
 
 	super setUp.
 	model := PCModel new.
-	
+	model randomSeed: 13.
 	model 
 		createGridNumberOfRows: 4 
 		numberOfColumns: 5 
@@ -24,6 +24,8 @@ PCCellTest >> setUp [
 		
 	cell := model cellAt: 2 at: 3.
 	harvester := model newEntity: PCHarvester.
+
+	
 	
 ]
 
@@ -49,7 +51,7 @@ PCCellTest >> testDoubleStep [
 	cell step.
 	
 	self assert: cell biomass equals: 3.
-	self assert: cell numberOfNewborns equals: 4.
+	self assert: cell numberOfNewborns equals: 2.
 	self assert: cell unvisitedCounter equals: 2.
 
 ]
@@ -93,12 +95,8 @@ PCCellTest >> testStepWithHarvester [
 	
 	harvester moveTo: cell.
 	cell biomass: 3.
-	cell step.
-	cell step. 
-	cell step.
-	cell step.
-	cell step. 
-	
+	5 timesRepeat: [cell step].
+
 	self assert: cell biomass equals: 3.
 	self assert: cell numberOfNewborns equals: 0.
 	self assert: cell unvisitedCounter equals: 0.
@@ -114,16 +112,26 @@ PCCellTest >> testTripleStep [
 	cell step.
 	
 	self assert: cell biomass equals: 2.
-	self assert: cell numberOfNewborns equals: 6.
+	self assert: cell numberOfNewborns equals: 2.
 	self assert: cell unvisitedCounter equals: 3.
 
 ]
 
 { #category : 'tests' }
-PCCellTest >> testUpdateNewbornBirds [
+PCCellTest >> testUpdateNewbornBirdsHighBiomass [
 	
+	cell biomass: 3.
 	cell updateNewbornBirds.
-	self assert: cell numberOfNewborns > 0.
+	self assert: cell numberOfNewborns equals: 2.
+	
+]
+
+{ #category : 'tests' }
+PCCellTest >> testUpdateNewbornBirdsLowBiomass [
+	
+	cell biomass: 0.
+	cell updateNewbornBirds.
+	self assert: cell numberOfNewborns equals: 0.
 	
 ]
 

@@ -107,8 +107,8 @@ PCCell >> updateNewbornBirds [
 	
 	occupationProportion <= 0.5 ifTrue: [ ^ self ].
 	((0.5 < occupationProportion) and: [occupationProportion < 0.8] ) ifTrue: [
-		numberOfNewborns := numberOfNewborns + 1 ].
-	occupationProportion >= 0.8 ifTrue: [ numberOfNewborns := numberOfNewborns + 2 ].
+		numberOfNewborns := 1 ].
+	occupationProportion >= 0.8 ifTrue: [ numberOfNewborns := 2 ].
 	
 	
 	

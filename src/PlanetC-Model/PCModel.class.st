@@ -59,6 +59,17 @@ PCModel >> initializeCellImages [
 ]
 
 { #category : 'initialization' }
+PCModel >> open [ 
+
+	| builder |
+	builder := CMR3SpaceDiagramBuilder new
+		cormasModel: self;
+		asPresenter.
+	
+	builder open.
+]
+
+{ #category : 'initialization' }
 PCModel >> step [ 
 	<control>
 	
