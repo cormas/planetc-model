@@ -29,12 +29,6 @@ PCHarvester >> collectBiomass [
 ]
 
 { #category : 'accessing' }
-PCHarvester >> goToCell: aCell [
-
-	self moveTo: aCell
-]
-
-{ #category : 'accessing' }
 PCHarvester >> harvestedBiomes [
 	^ harvestedBiomass 
 ]
@@ -80,7 +74,7 @@ PCHarvester >> povImage [
 ]
 
 { #category : 'initialization' }
-PCHarvester >> step [ 
+PCHarvester >> step [
 
 	self collectBiomass.
 ]

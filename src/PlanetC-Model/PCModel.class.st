@@ -42,16 +42,18 @@ PCModel >> harvesters [
 
 { #category : 'initialization' }
 PCModel >> initStandard [
+
 	<init>
-	self createGridNumberOfRows: 4 
-		numberOfColumns: 5 
-		neighbourhood: 8 
+	self
+		createGridNumberOfRows: 4
+		numberOfColumns: 5
+		neighbourhood: 8
 		closed: true.
-		
+
 	self initializeCellImages.
 	self initializeFamiliesAndHarvesters.
-	
-	harvesters do: [ :harvester | harvester moveTo: self pickRandomCell ]
+
+	"harvesters do: [ :harvester | harvester moveTo: self pickRandomCell ]"
 ]
 
 { #category : 'initialization' }
@@ -73,11 +75,11 @@ PCModel >> initializeCellImages [
 PCModel >> initializeFamiliesAndHarvesters [
 
 	| family harvester |
-
 	PCFamily availableColors do: [ :colorSymbol |
 		family := self newEntity: PCFamily.
 		family colorSymbol: colorSymbol.
-		
+		family cells: cells.
+
 		1 to: 4 do: [ :i |
 			harvester := self newEntity: PCHarvester.
 			family addChild: harvester ] ]

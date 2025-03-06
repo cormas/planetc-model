@@ -3,7 +3,6 @@ Class {
 	#superclass : 'CMAgentGroup',
 	#instVars : [
 		'colorSymbol',
-		'childrenHarvesters',
 		'cells'
 	],
 	#category : 'PlanetC-Model',
@@ -22,6 +21,12 @@ PCFamily >> cells [
 ]
 
 { #category : 'accessing' }
+PCFamily >> cells: aCollection [
+
+	cells := aCollection 
+]
+
+{ #category : 'accessing' }
 PCFamily >> colorSymbol [
 
 	^ colorSymbol
@@ -35,40 +40,27 @@ PCFamily >> colorSymbol: aSymbol [
 
 { #category : 'accessing' }
 PCFamily >> idealTactic [
-	
-	| threeChildren threeCells|
-	
+
+	| threeChildren threeCells |
 	threeChildren := self children first: 3.
 	threeCells := self searchForHighBiomassCells first: 3.
 	
-	threeChildren withIndexDo: [ 
-		:child :index | child goToCell: (threeCells at: index).
-		].
-]
-
-{ #category : 'accessing' }
-PCFamily >> initialize [
-
-	super initialize.
-	childrenHarvesters := self children.
-"	cells := PCModel cells
+	threeChildren withIndexDo: [ :child :index |
+		child moveTo: (threeCells at: index) ]
 	
-	Add cells"
 ]
 
 { #category : 'accessing' }
 PCFamily >> searchForHighBiomassCells [
 
-	| sortedCells |
-	sortedCells := cells sort: [ :a :b | a biomass > b biomass ].
-
-	^ sortedCells
+	^ cells sorted: [ :a :b | a biomass > b biomass ]
 ]
 
 { #category : 'accessing' }
 PCFamily >> step [
 
 	self idealTactic.
-	childrenHarvesters do: [ :childHarvester |
-		childHarvester collectBiomass ]
+	children
+		select: [ :harvester | harvester patch isNotNil ]
+		thenDo: [ :childHarvester | childHarvester collectBiomass ].
 ]
