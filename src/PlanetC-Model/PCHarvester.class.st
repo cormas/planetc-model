@@ -42,13 +42,21 @@ PCHarvester >> moveRandomly [
         (cell hasOccupantsOfClass: self class) not ]
 ]
 
-{ #category : 'initialization' }
+{ #category : 'pov' }
 PCHarvester >> pov [
     <pov>
     ^ CMPointOfView
-        color: CMColor blue
-        shape: #star
-        size: 0.6
+        color: (PCColor pieces at: self group colorSymbol)
+        shape: #circle
+        size: 0.3
+]
+
+{ #category : 'pov' }
+PCHarvester >> povImage [
+    <pov>
+    ^ CMPointOfView
+        image: (PCImages pieces at: self group colorSymbol)
+        size: 0.5
 ]
 
 { #category : 'initialization' }

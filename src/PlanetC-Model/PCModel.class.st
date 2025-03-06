@@ -3,7 +3,8 @@ Class {
 	#superclass : 'CMAbstractModel',
 	#instVars : [
 		'cells',
-		'harvesters'
+		'harvesters',
+		'families'
 	],
 	#category : 'PlanetC-Model',
 	#package : 'PlanetC-Model'
@@ -28,6 +29,12 @@ PCModel >> cells [
 ]
 
 { #category : 'initialization' }
+PCModel >> families [
+	<getterFor: #PCFamily >
+	^ families 
+]
+
+{ #category : 'initialization' }
 PCModel >> harvesters [
 	<getterFor: #PCHarvester >
 	^ harvesters 
@@ -42,14 +49,17 @@ PCModel >> initStandard [
 		closed: true.
 		
 	self initializeCellImages.
-	self createN: 2 randomlyLocatedAloneEntities: PCHarvester.
+	self initializeFamiliesAndHarvesters.
+	
+	harvesters do: [ :harvester | harvester moveTo: self pickRandomCell ]
 ]
 
 { #category : 'initialization' }
 PCModel >> initialize [ 
 	super initialize.
 	cells := OrderedCollection new.
-	harvesters := OrderedCollection new
+	harvesters := OrderedCollection new.
+	families := OrderedCollection new.
 ]
 
 { #category : 'initialization' }
@@ -57,6 +67,20 @@ PCModel >> initializeCellImages [
 
 	cells withIndexDo: [ :cell :index | 
 		cell useImage: (PCImages cells at: index) ]
+]
+
+{ #category : 'initialization' }
+PCModel >> initializeFamiliesAndHarvesters [
+
+	| family harvester |
+
+	PCFamily availableColors do: [ :colorSymbol |
+		family := self newEntity: PCFamily.
+		family colorSymbol: colorSymbol.
+		
+		1 to: 5 do: [ :i |
+			harvester := self newEntity: PCHarvester.
+			family addChild: harvester ] ]
 ]
 
 { #category : 'initialization' }
