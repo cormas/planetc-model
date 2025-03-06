@@ -54,7 +54,7 @@ PCColor class >> pieces [
 		#red -> self redPiece .
 		#green -> self greenPiece .
 		#blue -> self bluePiece .
-		#yellow -> self pinkPiece .
+		#yellow -> self yellowPiece .
 		#pink -> self pinkPiece .
 	} asDictionary
 ]

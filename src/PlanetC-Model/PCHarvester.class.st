@@ -24,6 +24,8 @@ PCHarvester >> harvestedBiomes [
 { #category : 'initialization' }
 PCHarvester >> initialize [ 
 	super initialize.
+	
+	harvestedBiomes := 0.
 ]
 
 { #category : 'initialization' }
@@ -47,7 +49,7 @@ PCHarvester >> pov [
     <pov>
     ^ CMPointOfView
         color: (PCColor pieces at: self group colorSymbol)
-        shape: #circle
+        shape: #star
         size: 0.3
 ]
 

@@ -78,20 +78,19 @@ PCModel >> initializeFamiliesAndHarvesters [
 		family := self newEntity: PCFamily.
 		family colorSymbol: colorSymbol.
 		
-		1 to: 5 do: [ :i |
+		1 to: 4 do: [ :i |
 			harvester := self newEntity: PCHarvester.
 			family addChild: harvester ] ]
 ]
 
 { #category : 'initialization' }
-PCModel >> open [ 
+PCModel >> open [
 
-	| builder |
-	builder := CMR3SpaceDiagramBuilder new
-		cormasModel: self;
-		asPresenter.
-	
-	builder open.
+	| tmp1 tmp3 |
+	tmp3 := CMR3SpaceDiagramBuilder new.
+	tmp3 cormasModel: self.
+	tmp1 := tmp3 asPresenter.
+	tmp1 open
 ]
 
 { #category : 'initialization' }
