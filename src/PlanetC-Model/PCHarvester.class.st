@@ -11,6 +11,12 @@ Class {
 }
 
 { #category : 'accessing' }
+PCHarvester >> goToCell: aCell [
+
+	self moveTo: aCell
+]
+
+{ #category : 'accessing' }
 PCHarvester >> harvestedBiomes [
 	^ harvestedBiomes 
 ]
@@ -18,6 +24,15 @@ PCHarvester >> harvestedBiomes [
 { #category : 'initialization' }
 PCHarvester >> initialize [ 
 	super initialize.
+]
+
+{ #category : 'initialization' }
+PCHarvester >> move [
+	<action>
+   
+	| theBestCell |
+	
+	theBestCell := self patch neighbourhoodAndSelf find: [ :cell | cell  ]
 ]
 
 { #category : 'initialization' }
