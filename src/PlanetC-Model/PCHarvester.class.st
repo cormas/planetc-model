@@ -81,7 +81,6 @@ PCHarvester >> povImage [
 
 { #category : 'initialization' }
 PCHarvester >> step [ 
-	
-	self moveRandomly.
+
 	self collectBiomass.
 ]

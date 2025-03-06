@@ -98,5 +98,5 @@ PCModel >> step [
 	<control>
 	
 	self cells do: [:cell | cell step].
-	self harvesters do: [:harvester | harvester step ].
+	self families do: [:family | family step ].
 ]
