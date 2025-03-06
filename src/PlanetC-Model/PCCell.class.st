@@ -78,19 +78,20 @@ PCCell >> unvisitedCounter [
 
 { #category : 'accessing' }
 PCCell >> updateBiomass [
-
-	| harvesters sumOfHBiomes |
+	<action>
+	| harvesters sumOfHarvestedBiomass |
+	
 	harvesters := self occupantsOfClass: PCHarvester.
-	sumOfHBiomes := 0.
+	sumOfHarvestedBiomass := 0.
 	harvesters isEmpty ifTrue: [
 		self unvisitedCounter = 1 ifTrue: [ biomass := 3 min: biomass + 1 ].
 		self unvisitedCounter >= 3 ifTrue: [ biomass := 0 max: biomass - 1 ] ].
-	harvesters size = 1 ifTrue: [ "to implement" ].
+	harvesters size = 1 ifTrue: [ biomass := biomass + 1 ].
 
 	harvesters size > 1 ifFalse: [ ^ self ].
-	sumOfHBiomes := harvesters sum: [ :harvester |
+	sumOfHarvestedBiomass := harvesters sum: [ :harvester |
 		                harvester harvestedBiomes ].
-	sumOfHBiomes = 3 ifTrue: [ biomass := biomass + 1 ]
+	sumOfHarvestedBiomass = 3 ifTrue: [ biomass := biomass + 1 ]
 ]
 
 { #category : 'accessing' }

@@ -4,11 +4,29 @@ Class {
 	#traits : 'TCMLocated',
 	#classTraits : 'TCMLocated classTrait',
 	#instVars : [
-		'harvestedBiomes'
+		'harvestedBiomass'
 	],
 	#category : 'PlanetC-Model',
 	#package : 'PlanetC-Model'
 }
+
+{ #category : 'initialization' }
+PCHarvester >> collectBiomass [
+	<action>
+	"change logic a little bit acording to the rules"
+	| biomass |
+	
+	biomass := self patch biomass.
+	biomass > 0 ifFalse: [ ^ self ].
+	 
+	((biomass = 1) or: [ biomass = 2 ]) ifTrue: [ 
+		harvestedBiomass := biomass + 1.
+		self patch biomass: self patch biomass - 1.
+		^ self
+		].
+	harvestedBiomass := harvestedBiomass + 2.
+	self patch biomass: self patch biomass - 1.
+]
 
 { #category : 'accessing' }
 PCHarvester >> goToCell: aCell [
@@ -18,14 +36,14 @@ PCHarvester >> goToCell: aCell [
 
 { #category : 'accessing' }
 PCHarvester >> harvestedBiomes [
-	^ harvestedBiomes 
+	^ harvestedBiomass 
 ]
 
 { #category : 'initialization' }
 PCHarvester >> initialize [ 
 	super initialize.
 	
-	harvestedBiomes := 0.
+	harvestedBiomass := 0.
 ]
 
 { #category : 'initialization' }
@@ -65,4 +83,5 @@ PCHarvester >> povImage [
 PCHarvester >> step [ 
 	
 	self moveRandomly.
+	self collectBiomass.
 ]

@@ -2,7 +2,8 @@ Class {
 	#name : 'PCFamily',
 	#superclass : 'CMAgentGroup',
 	#instVars : [
-		'colorSymbol'
+		'colorSymbol',
+		'childrenHarvesters'
 	],
 	#category : 'PlanetC-Model',
 	#package : 'PlanetC-Model'
