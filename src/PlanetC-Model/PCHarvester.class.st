@@ -21,10 +21,10 @@ PCHarvester >> collectBiomass [
 
 	(biomass = 1 or: [ biomass = 2 ]) ifTrue: [
 		harvestedBiomass := biomass + 1.
-		"self patch biomass: self patch biomass - 1."
+		self patch biomass: self patch biomass - 1.
 		^ self ].
 	harvestedBiomass := harvestedBiomass + 2.
-	"self patch biomass: self patch biomass - 1"
+	self patch biomass: self patch biomass - 1
 ]
 
 { #category : 'accessing' }
