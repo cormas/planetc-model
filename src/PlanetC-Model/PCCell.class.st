@@ -23,9 +23,21 @@ PCCell >> biomass: newBiomass [
 ]
 
 { #category : 'accessing' }
+PCCell >> decrementBiomass [
+
+	biomass := 0 max: biomass - 1
+]
+
+{ #category : 'accessing' }
 PCCell >> hasHarvesters [
 	
 	^ self hasOccupantsOfClass: PCHarvester.
+]
+
+{ #category : 'accessing' }
+PCCell >> incrementBiomass [
+
+	biomass := 3 min: biomass + 1
 ]
 
 { #category : 'accessing' }
@@ -78,20 +90,20 @@ PCCell >> unvisitedCounter [
 
 { #category : 'accessing' }
 PCCell >> updateBiomass [
+
 	<action>
 	| harvesters sumOfHarvestedBiomass |
-	
 	harvesters := self occupantsOfClass: PCHarvester.
 	sumOfHarvestedBiomass := 0.
 	harvesters isEmpty ifTrue: [
-		self unvisitedCounter = 1 ifTrue: [ biomass := 3 min: biomass + 1 ].
-		self unvisitedCounter >= 3 ifTrue: [ biomass := 0 max: biomass - 1 ] ].
-	harvesters size = 1 ifTrue: [ biomass := biomass + 1 ].
+		self unvisitedCounter = 1 ifTrue: [ self incrementBiomass ].
+		self unvisitedCounter >= 3 ifTrue: [ self decrementBiomass ] ].
+	harvesters size = 1 ifTrue: [ self incrementBiomass ].
 
 	harvesters size > 1 ifFalse: [ ^ self ].
 	sumOfHarvestedBiomass := harvesters sum: [ :harvester |
-		                harvester harvestedBiomes ].
-	sumOfHarvestedBiomass = 3 ifTrue: [ biomass := biomass + 1 ]
+		                         harvester harvestedBiomes ].
+	sumOfHarvestedBiomass = 3 ifTrue: [ self incrementBiomass ]
 ]
 
 { #category : 'accessing' }

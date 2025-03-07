@@ -78,7 +78,7 @@ PCModel >> initializeFamiliesAndHarvesters [
 	PCFamily availableColors do: [ :colorSymbol |
 		family := self newEntity: PCFamily.
 		family colorSymbol: colorSymbol.
-		family cells: cells.
+		family initializeCells: cells strategyClass: self randomStrategyClass.
 
 		1 to: 4 do: [ :i |
 			harvester := self newEntity: PCHarvester.
@@ -93,6 +93,12 @@ PCModel >> open [
 	tmp3 cormasModel: self.
 	tmp1 := tmp3 asPresenter.
 	tmp1 open
+]
+
+{ #category : 'as yet unclassified' }
+PCModel >> randomStrategyClass [
+
+	^ self selectRandomlyFrom: PCStrategy subclasses
 ]
 
 { #category : 'initialization' }

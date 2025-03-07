@@ -3,7 +3,7 @@ Class {
 	#superclass : 'CMAgentGroup',
 	#instVars : [
 		'colorSymbol',
-		'cells'
+		'strategy'
 	],
 	#category : 'PlanetC-Model',
 	#package : 'PlanetC-Model'
@@ -16,14 +16,11 @@ PCFamily class >> availableColors [
 ]
 
 { #category : 'accessing' }
-PCFamily >> cells [
-	^ cells
-]
-
-{ #category : 'accessing' }
-PCFamily >> cells: aCollection [
-
-	cells := aCollection 
+PCFamily >> collectBiomass [ 
+	
+	children
+		select: [ :harvester | harvester patch isNotNil ]
+		thenDo: [ :childHarvester | childHarvester collectBiomass ]
 ]
 
 { #category : 'accessing' }
@@ -38,29 +35,24 @@ PCFamily >> colorSymbol: aSymbol [
 	colorSymbol := aSymbol
 ]
 
-{ #category : 'accessing' }
-PCFamily >> idealTactic [
+{ #category : 'initialization' }
+PCFamily >> initializeCells: aCollection strategyClass: aStrategyClass [
 
-	| threeChildren threeCells |
-	threeChildren := self children first: 3.
-	threeCells := self searchForHighBiomassCells first: 3.
-	
-	threeChildren withIndexDo: [ :child :index |
-		child moveTo: (threeCells at: index) ]
-	
+	strategy := aStrategyClass new
+		            family: self;
+		            cells: aCollection;
+		            yourself
 ]
 
 { #category : 'accessing' }
-PCFamily >> searchForHighBiomassCells [
+PCFamily >> sendHarvesters [ 
 
-	^ cells sorted: [ :a :b | a biomass > b biomass ]
+	strategy sendHarvesters.
 ]
 
 { #category : 'accessing' }
 PCFamily >> step [
 
-	self idealTactic.
-	children
-		select: [ :harvester | harvester patch isNotNil ]
-		thenDo: [ :childHarvester | childHarvester collectBiomass ].
+	self sendHarvesters.
+	self collectBiomass.
 ]

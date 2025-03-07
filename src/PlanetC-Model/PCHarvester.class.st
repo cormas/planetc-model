@@ -12,20 +12,19 @@ Class {
 
 { #category : 'initialization' }
 PCHarvester >> collectBiomass [
-	<action>
 	"change logic a little bit acording to the rules"
+
+	<action>
 	| biomass |
-	
 	biomass := self patch biomass.
 	biomass > 0 ifFalse: [ ^ self ].
-	 
-	((biomass = 1) or: [ biomass = 2 ]) ifTrue: [ 
+
+	(biomass = 1 or: [ biomass = 2 ]) ifTrue: [
 		harvestedBiomass := biomass + 1.
-		self patch biomass: self patch biomass - 1.
-		^ self
-		].
+		"self patch biomass: self patch biomass - 1."
+		^ self ].
 	harvestedBiomass := harvestedBiomass + 2.
-	self patch biomass: self patch biomass - 1.
+	"self patch biomass: self patch biomass - 1"
 ]
 
 { #category : 'accessing' }
@@ -38,15 +37,6 @@ PCHarvester >> initialize [
 	super initialize.
 	
 	harvestedBiomass := 0.
-]
-
-{ #category : 'initialization' }
-PCHarvester >> move [
-	<action>
-   
-	| theBestCell |
-	
-	theBestCell := self patch neighbourhoodAndSelf find: [ :cell | cell  ]
 ]
 
 { #category : 'initialization' }
