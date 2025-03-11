@@ -20,11 +20,11 @@ PCHarvester >> collectBiomass [
 	biomass > 0 ifFalse: [ ^ self ].
 
 	(biomass = 1 or: [ biomass = 2 ]) ifTrue: [
-		harvestedBiomass := biomass + 1.
-		self patch biomass: self patch biomass - 1.
+		harvestedBiomass := biomass.
+		self patch biomass: self patch biomass - biomass.
 		^ self ].
 	harvestedBiomass := harvestedBiomass + 2.
-	self patch biomass: self patch biomass - 1
+	self patch biomass: self patch biomass - 2
 ]
 
 { #category : 'accessing' }
@@ -33,9 +33,10 @@ PCHarvester >> harvestedBiomass [
 ]
 
 { #category : 'initialization' }
-PCHarvester >> initialize [ 
+PCHarvester >> initialize [
+
 	super initialize.
-	
+
 	harvestedBiomass := 0.
 ]
 

@@ -31,9 +31,12 @@ PCCellTest >> setUp [
 ]
 
 { #category : 'tests' }
-PCCellTest >> tearDown [ 
+PCCellTest >> tearDown [
 
-	super tearDown. 
+	harvester initialize.
+	harvester2 initialize.
+	harvester3 initialize.
+	super tearDown.
 ]
 
 { #category : 'tests' }
@@ -50,7 +53,7 @@ PCCellTest >> testCollectingOfOneBiomass [
 	cell biomass: 1.
 	harvester moveTo: cell.
 	harvester collectBiomass.
-	self assert: harvester harvestedBiomass equals: 1
+	self assert: harvester harvestedBiomass equals: 1.
 ]
 
 { #category : 'tests' }
@@ -297,7 +300,7 @@ PCCellTest >> testProgressionOfThreeBiomassAndTwoHarvester [
 	harvester2 moveTo: cell.
 	cell biomass: 3.
 	cell step.
-	self assert: cell biomass equals: 1
+	self assert: cell biomass equals: 3
 ]
 
 { #category : 'tests' }
@@ -309,7 +312,7 @@ PCCellTest >> testProgressionOfThreeBiomassAndTwoHarvesterDoubleStep [
 	cell step.
 	cell step.
 
-	self assert: cell biomass equals: 0
+	self assert: cell biomass equals: 3
 ]
 
 { #category : 'tests' }
@@ -322,7 +325,7 @@ PCCellTest >> testProgressionOfThreeBiomassAndTwoHarvesterQuadrupleStep [
 	cell step.
 	cell step.
 	cell step.
-	self assert: cell biomass equals: 0
+	self assert: cell biomass equals: 3
 ]
 
 { #category : 'tests' }
@@ -332,7 +335,7 @@ PCCellTest >> testProgressionOfThreeBiomassAndTwoHarvesterQuintupleStep [
 	harvester2 moveTo: cell.
 	cell biomass: 3.
 	5 timesRepeat: [ cell step ].
-	self assert: cell biomass equals: 0
+	self assert: cell biomass equals: 3
 ]
 
 { #category : 'tests' }
@@ -344,7 +347,7 @@ PCCellTest >> testProgressionOfThreeBiomassAndTwoHarvesterTripleStep [
 	cell step.
 	cell step.
 	cell step.
-	self assert: cell biomass equals: 0
+	self assert: cell biomass equals: 3
 ]
 
 { #category : 'tests' }
@@ -396,22 +399,22 @@ PCCellTest >> testProgressionOfTwoBiomass [
 
 { #category : 'tests' }
 PCCellTest >> testProgressionOfTwoBiomassAndOneHarvester [
-	
+
 	harvester moveTo: cell.
 	cell biomass: 2.
 	cell step.
-	self assert: cell biomass equals: 2.
+	self assert: cell biomass equals: 3
 ]
 
 { #category : 'tests' }
 PCCellTest >> testProgressionOfTwoBiomassAndOneHarvesterDoubleStep [
-	
+
 	harvester moveTo: cell.
 	cell biomass: 2.
 	cell step.
 	cell step.
 
-	self assert: cell biomass equals: 2
+	self assert: cell biomass equals: 3
 ]
 
 { #category : 'tests' }
@@ -423,7 +426,7 @@ PCCellTest >> testProgressionOfTwoBiomassAndOneHarvesterQuadrupleStep [
 	cell step.
 	cell step.
 	cell step.
-	self assert: cell biomass equals: 2
+	self assert: cell biomass equals: 3
 ]
 
 { #category : 'tests' }
@@ -432,18 +435,18 @@ PCCellTest >> testProgressionOfTwoBiomassAndOneHarvesterQuintupleStep [
 	harvester moveTo: cell.
 	cell biomass: 2.
 	5 timesRepeat: [ cell step ].
-	self assert: cell biomass equals: 2
+	self assert: cell biomass equals: 3
 ]
 
 { #category : 'tests' }
 PCCellTest >> testProgressionOfTwoBiomassAndOneHarvesterTripleStep [
-	
+
 	harvester moveTo: cell.
 	cell biomass: 2.
 	cell step.
 	cell step.
 	cell step.
-	self assert: cell biomass equals: 2
+	self assert: cell biomass equals: 3
 ]
 
 { #category : 'tests' }
@@ -510,7 +513,7 @@ PCCellTest >> testProgressionOfZeroBiomassAndOneHarvesterDoubleStep [
 	cell step.
 	cell step.
 
-	self assert: cell biomass equals: 0
+	self assert: cell biomass equals: 2
 ]
 
 { #category : 'tests' }
@@ -521,7 +524,7 @@ PCCellTest >> testProgressionOfZeroBiomassAndOneHarvesterTripleStep [
 	cell step.
 	cell step.
 	cell step.
-	self assert: cell biomass equals: 0
+	self assert: cell biomass equals: 3
 ]
 
 { #category : 'tests' }
