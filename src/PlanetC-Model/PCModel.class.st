@@ -53,7 +53,6 @@ PCModel >> initStandard [
 
 	self initializeCellImages.
 	self initializeFamiliesAndHarvesters.
-	parkManager := self newEntity: PCHarvester.
 
 	"harvesters do: [ :harvester | harvester moveTo: self pickRandomCell ]"
 ]
