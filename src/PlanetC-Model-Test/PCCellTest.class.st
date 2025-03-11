@@ -5,7 +5,8 @@ Class {
 		'model',
 		'cell',
 		'harvester',
-		'harvester2'
+		'harvester2',
+		'harvester3'
 	],
 	#category : 'PlanetC-Model-Test',
 	#package : 'PlanetC-Model-Test'
@@ -26,6 +27,7 @@ PCCellTest >> setUp [
 	cell := model cellAt: 2 at: 3.
 	harvester := model newEntity: PCHarvester.
 	harvester2 := model newEntity: PCHarvester.
+	harvester3 := model newEntity: PCHarvester.
 ]
 
 { #category : 'tests' }
@@ -40,6 +42,157 @@ PCCellTest >> testBiomass [
 	cell biomass: 2.
 	
 	self assert: cell biomass equals: 2.
+]
+
+{ #category : 'tests' }
+PCCellTest >> testCollectingOfOneBiomass [
+
+	cell biomass: 1.
+	harvester moveTo: cell.
+	harvester collectBiomass.
+	self assert: harvester harvestedBiomass equals: 1
+]
+
+{ #category : 'tests' }
+PCCellTest >> testCollectingOfOneBiomassThreeHarvesters [
+
+	cell biomass: 1.
+	harvester moveTo: cell.
+	harvester2 moveTo: cell.
+	harvester3 moveTo: cell.
+	harvester collectBiomass.
+	harvester2 collectBiomass.
+	harvester3 collectBiomass.
+
+	self assert: harvester harvestedBiomass equals: 1.
+	self assert: harvester2 harvestedBiomass equals: 0.
+	self assert: harvester3 harvestedBiomass equals: 0.
+]
+
+{ #category : 'tests' }
+PCCellTest >> testCollectingOfOneBiomassTwoHarvesters [
+
+	cell biomass: 1.
+	harvester moveTo: cell.
+	harvester2 moveTo: cell.
+	harvester collectBiomass.
+	harvester2 collectBiomass.
+
+	self assert: harvester harvestedBiomass equals: 1.
+	self assert: harvester2 harvestedBiomass equals: 0.
+]
+
+{ #category : 'tests' }
+PCCellTest >> testCollectingOfThreeBiomass [
+
+	cell biomass: 3.
+	harvester moveTo: cell.
+	harvester collectBiomass.
+	self assert: harvester harvestedBiomass equals: 2.
+]
+
+{ #category : 'tests' }
+PCCellTest >> testCollectingOfThreeBiomassThreeHarvesters [
+
+	cell biomass: 3.
+	harvester moveTo: cell.
+	harvester2 moveTo: cell.
+	harvester3 moveTo: cell.
+	harvester collectBiomass.
+	harvester2 collectBiomass.
+	harvester3 collectBiomass.
+
+	self assert: harvester harvestedBiomass equals: 2.
+	self assert: harvester2 harvestedBiomass equals: 1.
+	self assert: harvester3 harvestedBiomass equals: 0.
+]
+
+{ #category : 'tests' }
+PCCellTest >> testCollectingOfThreeBiomassTwoHarvesters [
+
+	cell biomass: 3.
+	harvester moveTo: cell.
+	harvester2 moveTo: cell.
+	harvester collectBiomass.
+	harvester2 collectBiomass.
+
+	self assert: harvester harvestedBiomass equals: 2.
+	self assert: harvester2 harvestedBiomass equals: 1.
+]
+
+{ #category : 'tests' }
+PCCellTest >> testCollectingOfTwoBiomass [
+
+	cell biomass: 2.
+	harvester moveTo: cell.
+	harvester collectBiomass.
+	self assert: harvester harvestedBiomass equals: 2.
+]
+
+{ #category : 'tests' }
+PCCellTest >> testCollectingOfTwoBiomassThreeHarvesters [
+
+	cell biomass: 2.
+	harvester moveTo: cell.
+	harvester2 moveTo: cell.
+	harvester3 moveTo: cell.
+	harvester collectBiomass.
+	harvester2 collectBiomass.
+	harvester3 collectBiomass.
+
+	self assert: harvester harvestedBiomass equals: 2.
+	self assert: harvester2 harvestedBiomass equals: 0.
+	self assert: harvester3 harvestedBiomass equals: 0.
+]
+
+{ #category : 'tests' }
+PCCellTest >> testCollectingOfTwoBiomassTwoHarvesters [
+
+	cell biomass: 2.
+	harvester moveTo: cell.
+	harvester2 moveTo: cell.
+	harvester collectBiomass.
+	harvester2 collectBiomass.
+
+	self assert: harvester harvestedBiomass equals: 2.
+	self assert: harvester2 harvestedBiomass equals: 0.
+]
+
+{ #category : 'tests' }
+PCCellTest >> testCollectingOfZeroBiomass [
+
+	cell biomass: 0.
+	harvester moveTo: cell.
+	harvester collectBiomass.
+	self assert: harvester harvestedBiomass equals: 0.
+]
+
+{ #category : 'tests' }
+PCCellTest >> testCollectingOfZeroBiomassThreeHarvesters [
+
+	cell biomass: 0.
+	harvester moveTo: cell.
+	harvester2 moveTo: cell.
+	harvester3 moveTo: cell.
+	harvester collectBiomass.
+	harvester2 collectBiomass.
+	harvester3 collectBiomass.
+
+	self assert: harvester harvestedBiomass equals: 0.
+	self assert: harvester2 harvestedBiomass equals: 0.
+	self assert: harvester3 harvestedBiomass equals: 0.
+]
+
+{ #category : 'tests' }
+PCCellTest >> testCollectingOfZeroBiomassTwoHarvesters [
+
+	cell biomass: 0.
+	harvester moveTo: cell.
+	harvester2 moveTo: cell.
+	harvester collectBiomass.
+	harvester2 collectBiomass.
+	self assert: harvester harvestedBiomass equals: 0.
+	self assert: harvester2 harvestedBiomass equals: 0.
 ]
 
 { #category : 'tests' }
@@ -409,7 +562,7 @@ PCCellTest >> testStepWithHarvester [
 	harvester moveTo: cell.
 	cell biomass: 3.
 	1 to: 5 do: [ :tmp1 | cell step ].
-	5.
+	1.
 	self
 		assert: cell biomass equals: 3;
 		assert: cell numberOfNewborns equals: 0;

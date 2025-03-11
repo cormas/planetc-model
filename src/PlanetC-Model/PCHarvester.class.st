@@ -28,7 +28,7 @@ PCHarvester >> collectBiomass [
 ]
 
 { #category : 'accessing' }
-PCHarvester >> harvestedBiomes [
+PCHarvester >> harvestedBiomass [
 	^ harvestedBiomass 
 ]
 

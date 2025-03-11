@@ -102,7 +102,7 @@ PCCell >> updateBiomass [
 
 	harvesters size > 1 ifFalse: [ ^ self ].
 	sumOfHarvestedBiomass := harvesters sum: [ :harvester |
-		                         harvester harvestedBiomes ].
+		                         harvester harvestedBiomass ].
 	sumOfHarvestedBiomass = 3 ifTrue: [ self incrementBiomass ]
 ]
 
