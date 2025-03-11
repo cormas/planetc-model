@@ -53,9 +53,22 @@ PCModel >> initStandard [
 
 	self initializeCellImages.
 	self initializeFamiliesAndHarvesters.
-	self initializeParkManager.
+	self initializeParkManager
+]
 
-	"harvesters do: [ :harvester | harvester moveTo: self pickRandomCell ]"
+{ #category : 'initialization' }
+PCModel >> initStandardPlusBases [
+
+	<init>
+	self
+		createGridNumberOfRows: 6
+		numberOfColumns: 7
+		neighbourhood: 8
+		closed: true.
+
+	self initializeCellImages.
+	self initializeFamiliesAndHarvesters.
+	self initializeParkManager
 ]
 
 { #category : 'initialization' }

@@ -29,11 +29,12 @@ PCParkManager >> pov [
 { #category : 'accessing' }
 PCParkManager >> protectCells [
 
+	strategy unprotectOldCells.
 	strategy sendParkManager.
 ]
 
 { #category : 'accessing' }
 PCParkManager >> step [
 
-	self protectCells.
+	self protectCells
 ]
