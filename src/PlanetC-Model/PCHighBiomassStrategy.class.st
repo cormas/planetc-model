@@ -1,6 +1,6 @@
 Class {
 	#name : 'PCHighBiomassStrategy',
-	#superclass : 'PCStrategy',
+	#superclass : 'PCHarvesterStrategy',
 	#category : 'PlanetC-Model',
 	#package : 'PlanetC-Model'
 }

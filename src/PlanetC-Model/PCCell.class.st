@@ -75,6 +75,12 @@ PCCell >> povBoard [
 	^ CMPointOfView image: image
 ]
 
+{ #category : 'as yet unclassified' }
+PCCell >> setProtected: aBoolean [
+
+	isProtected := aBoolean.
+]
+
 { #category : 'accessing' }
 PCCell >> step [
 	self updateUnvisitedCounter.

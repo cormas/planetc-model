@@ -53,6 +53,7 @@ PCModel >> initStandard [
 
 	self initializeCellImages.
 	self initializeFamiliesAndHarvesters.
+	self initializeParkManager.
 
 	"harvesters do: [ :harvester | harvester moveTo: self pickRandomCell ]"
 ]
@@ -81,11 +82,21 @@ PCModel >> initializeFamiliesAndHarvesters [
 	PCFamily availableColors do: [ :colorSymbol |
 		family := self newEntity: PCFamily.
 		family colorSymbol: colorSymbol.
-		family initializeCells: cells strategyClass: self randomStrategyClass.
+		family initializeCells: cells strategyClass: self randomHarvesterStrategyClass.
 
 		1 to: 4 do: [ :i |
 			harvester := self newEntity: PCHarvester.
 			family addChild: harvester ] ]
+]
+
+{ #category : 'initialization' }
+PCModel >> initializeParkManager [
+
+	| newParkManager |
+	newParkManager := self newEntity: PCParkManager.
+	newParkManager
+		initializeCells: cells
+		strategyClass: self randomParkManagerStrategyClass 
 ]
 
 { #category : 'initialization' }
@@ -105,15 +116,22 @@ PCModel >> parkManager [
 ]
 
 { #category : 'as yet unclassified' }
-PCModel >> randomStrategyClass [
+PCModel >> randomHarvesterStrategyClass [
 
-	^ self selectRandomlyFrom: PCStrategy subclasses
+	^ self selectRandomlyFrom: PCHarvesterStrategy subclasses
+]
+
+{ #category : 'as yet unclassified' }
+PCModel >> randomParkManagerStrategyClass [
+
+	^ self selectRandomlyFrom: PCParkManagerStrategy subclasses
 ]
 
 { #category : 'initialization' }
-PCModel >> step [ 
+PCModel >> step [
+
 	<control>
-	
-	self cells do: [:cell | cell step].
-	self families do: [:family | family step ].
+	self cells do: [ :cell | cell step ].
+	self families do: [ :family | family step ].
+	self parkManager do: [ :pManager | pManager step ].
 ]
