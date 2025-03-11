@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'cells',
 		'harvesters',
-		'families'
+		'families',
+		'parkManager'
 	],
 	#category : 'PlanetC-Model',
 	#package : 'PlanetC-Model'
@@ -52,16 +53,19 @@ PCModel >> initStandard [
 
 	self initializeCellImages.
 	self initializeFamiliesAndHarvesters.
+	parkManager := self newEntity: PCHarvester.
 
 	"harvesters do: [ :harvester | harvester moveTo: self pickRandomCell ]"
 ]
 
 { #category : 'initialization' }
-PCModel >> initialize [ 
+PCModel >> initialize [
+
 	super initialize.
 	cells := OrderedCollection new.
 	harvesters := OrderedCollection new.
 	families := OrderedCollection new.
+	parkManager := OrderedCollection new.
 ]
 
 { #category : 'initialization' }
@@ -88,11 +92,17 @@ PCModel >> initializeFamiliesAndHarvesters [
 { #category : 'initialization' }
 PCModel >> open [
 
-	| tmp1 tmp3 |
-	tmp3 := CMR3SpaceDiagramBuilder new.
-	tmp3 cormasModel: self.
-	tmp1 := tmp3 asPresenter.
+	| tmp1 tmp2 |
+	tmp2 := CMR3SpaceDiagramBuilder new.
+	tmp2 cormasModel: self.
+	tmp1 := tmp2 asPresenter.
 	tmp1 open
+]
+
+{ #category : 'initialization' }
+PCModel >> parkManager [
+	<getterFor: #PCParkManager>
+	^ parkManager 
 ]
 
 { #category : 'as yet unclassified' }
