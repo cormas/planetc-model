@@ -1,5 +1,5 @@
 Class {
-	#name : 'PCCellTest',
+	#name : 'PCRegularModelTest',
 	#superclass : 'TestCase',
 	#instVars : [
 		'model',
@@ -13,34 +13,22 @@ Class {
 }
 
 { #category : 'running' }
-PCCellTest >> setUp [
+PCRegularModelTest >> setUp [
 
+	| fixture |
 	super setUp.
-	model := PCModel new.
-	model randomSeed: 13.
-	model
-		createGridNumberOfRows: 4
-		numberOfColumns: 5
-		neighbourhood: 8
-		closed: true.
 
-	cell := model cellAt: 2 at: 3.
-	harvester := model newEntity: PCHarvester.
-	harvester2 := model newEntity: PCHarvester.
-	harvester3 := model newEntity: PCHarvester.
+	fixture := PCModelFixture new.
+
+	model := fixture model.
+	cell := fixture cell.
+	harvester := fixture harvester1.
+	harvester2 := fixture harvester2.
+	harvester3 := fixture harvester3
 ]
 
 { #category : 'tests' }
-PCCellTest >> tearDown [
-
-	harvester initialize.
-	harvester2 initialize.
-	harvester3 initialize.
-	super tearDown.
-]
-
-{ #category : 'tests' }
-PCCellTest >> testBiomass [ 
+PCRegularModelTest >> testBiomass [ 
 	
 	cell biomass: 2.
 	
@@ -48,7 +36,18 @@ PCCellTest >> testBiomass [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testCollectingOfOneBiomass [
+PCRegularModelTest >> testCollectBiomassInCorrectOrder [
+
+	cell biomass: 3.
+
+	model step.
+
+	self assert: harvester harvestedBiomass equals: 2.
+	self assert: harvester2 harvestedBiomass equals: 1
+]
+
+{ #category : 'tests' }
+PCRegularModelTest >> testCollectingOfOneBiomass [
 
 	cell biomass: 1.
 	harvester moveTo: cell.
@@ -57,7 +56,7 @@ PCCellTest >> testCollectingOfOneBiomass [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testCollectingOfOneBiomassThreeHarvesters [
+PCRegularModelTest >> testCollectingOfOneBiomassThreeHarvesters [
 
 	cell biomass: 1.
 	harvester moveTo: cell.
@@ -73,7 +72,7 @@ PCCellTest >> testCollectingOfOneBiomassThreeHarvesters [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testCollectingOfOneBiomassTwoHarvesters [
+PCRegularModelTest >> testCollectingOfOneBiomassTwoHarvesters [
 
 	cell biomass: 1.
 	harvester moveTo: cell.
@@ -86,7 +85,7 @@ PCCellTest >> testCollectingOfOneBiomassTwoHarvesters [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testCollectingOfThreeBiomass [
+PCRegularModelTest >> testCollectingOfThreeBiomass [
 
 	cell biomass: 3.
 	harvester moveTo: cell.
@@ -95,7 +94,7 @@ PCCellTest >> testCollectingOfThreeBiomass [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testCollectingOfThreeBiomassThreeHarvesters [
+PCRegularModelTest >> testCollectingOfThreeBiomassThreeHarvesters [
 
 	cell biomass: 3.
 	harvester moveTo: cell.
@@ -111,7 +110,7 @@ PCCellTest >> testCollectingOfThreeBiomassThreeHarvesters [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testCollectingOfThreeBiomassTwoHarvesters [
+PCRegularModelTest >> testCollectingOfThreeBiomassTwoHarvesters [
 
 	cell biomass: 3.
 	harvester moveTo: cell.
@@ -124,7 +123,7 @@ PCCellTest >> testCollectingOfThreeBiomassTwoHarvesters [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testCollectingOfTwoBiomass [
+PCRegularModelTest >> testCollectingOfTwoBiomass [
 
 	cell biomass: 2.
 	harvester moveTo: cell.
@@ -133,7 +132,7 @@ PCCellTest >> testCollectingOfTwoBiomass [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testCollectingOfTwoBiomassThreeHarvesters [
+PCRegularModelTest >> testCollectingOfTwoBiomassThreeHarvesters [
 
 	cell biomass: 2.
 	harvester moveTo: cell.
@@ -149,7 +148,7 @@ PCCellTest >> testCollectingOfTwoBiomassThreeHarvesters [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testCollectingOfTwoBiomassTwoHarvesters [
+PCRegularModelTest >> testCollectingOfTwoBiomassTwoHarvesters [
 
 	cell biomass: 2.
 	harvester moveTo: cell.
@@ -162,7 +161,7 @@ PCCellTest >> testCollectingOfTwoBiomassTwoHarvesters [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testCollectingOfZeroBiomass [
+PCRegularModelTest >> testCollectingOfZeroBiomass [
 
 	cell biomass: 0.
 	harvester moveTo: cell.
@@ -171,7 +170,7 @@ PCCellTest >> testCollectingOfZeroBiomass [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testCollectingOfZeroBiomassThreeHarvesters [
+PCRegularModelTest >> testCollectingOfZeroBiomassThreeHarvesters [
 
 	cell biomass: 0.
 	harvester moveTo: cell.
@@ -187,7 +186,7 @@ PCCellTest >> testCollectingOfZeroBiomassThreeHarvesters [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testCollectingOfZeroBiomassTwoHarvesters [
+PCRegularModelTest >> testCollectingOfZeroBiomassTwoHarvesters [
 
 	cell biomass: 0.
 	harvester moveTo: cell.
@@ -199,7 +198,7 @@ PCCellTest >> testCollectingOfZeroBiomassTwoHarvesters [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testDoubleStep [
+PCRegularModelTest >> testDoubleStep [
 
 	cell
 		biomass: 3;
@@ -212,7 +211,7 @@ PCCellTest >> testDoubleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testInitialize [
+PCRegularModelTest >> testInitialize [
 
 	self assert: ((cell biomass >= 0) and: (cell biomass <= 3)).
 	self assert: cell numberOfNewborns equals: 0.
@@ -221,20 +220,20 @@ PCCellTest >> testInitialize [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testNumberOfNewborns [
+PCRegularModelTest >> testNumberOfNewborns [
 
 	self assert: cell numberOfNewborns equals: 0.
 	
 ]
 
 { #category : 'tests' }
-PCCellTest >> testPov [ 
+PCRegularModelTest >> testPov [ 
 
 	self assert: cell pov class equals: CMPointOfView 
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomass [
+PCRegularModelTest >> testProgressionOfThreeBiomass [
 
 	cell biomass: 3.
 	cell step.
@@ -242,7 +241,7 @@ PCCellTest >> testProgressionOfThreeBiomass [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassAndOneHarvester [
+PCRegularModelTest >> testProgressionOfThreeBiomassAndOneHarvester [
 	
 	harvester moveTo: cell.
 	cell biomass: 3.
@@ -251,7 +250,7 @@ PCCellTest >> testProgressionOfThreeBiomassAndOneHarvester [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassAndOneHarvesterDoubleStep [
+PCRegularModelTest >> testProgressionOfThreeBiomassAndOneHarvesterDoubleStep [
 	
 	harvester moveTo: cell.
 	cell biomass: 3.
@@ -262,7 +261,7 @@ PCCellTest >> testProgressionOfThreeBiomassAndOneHarvesterDoubleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassAndOneHarvesterQuadrupleStep [
+PCRegularModelTest >> testProgressionOfThreeBiomassAndOneHarvesterQuadrupleStep [
 	
 	harvester moveTo: cell.
 	cell biomass: 3.
@@ -274,7 +273,7 @@ PCCellTest >> testProgressionOfThreeBiomassAndOneHarvesterQuadrupleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassAndOneHarvesterQuintupleStep [
+PCRegularModelTest >> testProgressionOfThreeBiomassAndOneHarvesterQuintupleStep [
 	
 	harvester moveTo: cell.
 	cell biomass: 3.
@@ -283,7 +282,7 @@ PCCellTest >> testProgressionOfThreeBiomassAndOneHarvesterQuintupleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassAndOneHarvesterTripleStep [
+PCRegularModelTest >> testProgressionOfThreeBiomassAndOneHarvesterTripleStep [
 
 	harvester moveTo: cell.
 	cell biomass: 3.
@@ -294,42 +293,42 @@ PCCellTest >> testProgressionOfThreeBiomassAndOneHarvesterTripleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassAndTwoHarvester [
-
-	harvester moveTo: cell.
-	harvester2 moveTo: cell.
-	cell biomass: 3.
-	cell step.
-	self assert: cell biomass equals: 3
-]
-
-{ #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassAndTwoHarvesterDoubleStep [
+PCRegularModelTest >> testProgressionOfThreeBiomassAndTwoHarvester [
 
 	harvester moveTo: cell.
 	harvester2 moveTo: cell.
 	cell biomass: 3.
 	cell step.
-	cell step.
-
 	self assert: cell biomass equals: 3
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassAndTwoHarvesterQuadrupleStep [
+PCRegularModelTest >> testProgressionOfThreeBiomassAndTwoHarvesterDoubleStep [
 
 	harvester moveTo: cell.
 	harvester2 moveTo: cell.
 	cell biomass: 3.
 	cell step.
 	cell step.
+
+	self assert: cell biomass equals: 3
+]
+
+{ #category : 'tests' }
+PCRegularModelTest >> testProgressionOfThreeBiomassAndTwoHarvesterQuadrupleStep [
+
+	harvester moveTo: cell.
+	harvester2 moveTo: cell.
+	cell biomass: 3.
+	cell step.
+	cell step.
 	cell step.
 	cell step.
 	self assert: cell biomass equals: 3
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassAndTwoHarvesterQuintupleStep [
+PCRegularModelTest >> testProgressionOfThreeBiomassAndTwoHarvesterQuintupleStep [
 
 	harvester moveTo: cell.
 	harvester2 moveTo: cell.
@@ -339,7 +338,7 @@ PCCellTest >> testProgressionOfThreeBiomassAndTwoHarvesterQuintupleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassAndTwoHarvesterTripleStep [
+PCRegularModelTest >> testProgressionOfThreeBiomassAndTwoHarvesterTripleStep [
 
 	harvester moveTo: cell.
 	harvester2 moveTo: cell.
@@ -351,7 +350,7 @@ PCCellTest >> testProgressionOfThreeBiomassAndTwoHarvesterTripleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassDoubleStep [
+PCRegularModelTest >> testProgressionOfThreeBiomassDoubleStep [
 
 	cell biomass: 3.
 	cell step.
@@ -361,7 +360,7 @@ PCCellTest >> testProgressionOfThreeBiomassDoubleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassQuadrupleStep [
+PCRegularModelTest >> testProgressionOfThreeBiomassQuadrupleStep [
 
 	cell biomass: 3.
 	cell step.
@@ -372,7 +371,7 @@ PCCellTest >> testProgressionOfThreeBiomassQuadrupleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassQuintupleStep [
+PCRegularModelTest >> testProgressionOfThreeBiomassQuintupleStep [
 
 	cell biomass: 3.
 	5 timesRepeat: [ cell step ].
@@ -380,7 +379,7 @@ PCCellTest >> testProgressionOfThreeBiomassQuintupleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfThreeBiomassTripleStep [
+PCRegularModelTest >> testProgressionOfThreeBiomassTripleStep [
 
 	cell biomass: 3.
 	cell step.
@@ -390,7 +389,7 @@ PCCellTest >> testProgressionOfThreeBiomassTripleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfTwoBiomass [
+PCRegularModelTest >> testProgressionOfTwoBiomass [
 
 	cell biomass: 2.
 	cell step.
@@ -398,7 +397,7 @@ PCCellTest >> testProgressionOfTwoBiomass [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfTwoBiomassAndOneHarvester [
+PCRegularModelTest >> testProgressionOfTwoBiomassAndOneHarvester [
 
 	harvester moveTo: cell.
 	cell biomass: 2.
@@ -407,7 +406,7 @@ PCCellTest >> testProgressionOfTwoBiomassAndOneHarvester [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfTwoBiomassAndOneHarvesterDoubleStep [
+PCRegularModelTest >> testProgressionOfTwoBiomassAndOneHarvesterDoubleStep [
 
 	harvester moveTo: cell.
 	cell biomass: 2.
@@ -418,7 +417,7 @@ PCCellTest >> testProgressionOfTwoBiomassAndOneHarvesterDoubleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfTwoBiomassAndOneHarvesterQuadrupleStep [
+PCRegularModelTest >> testProgressionOfTwoBiomassAndOneHarvesterQuadrupleStep [
 
 	harvester moveTo: cell.
 	cell biomass: 2.
@@ -430,7 +429,7 @@ PCCellTest >> testProgressionOfTwoBiomassAndOneHarvesterQuadrupleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfTwoBiomassAndOneHarvesterQuintupleStep [
+PCRegularModelTest >> testProgressionOfTwoBiomassAndOneHarvesterQuintupleStep [
 
 	harvester moveTo: cell.
 	cell biomass: 2.
@@ -439,7 +438,7 @@ PCCellTest >> testProgressionOfTwoBiomassAndOneHarvesterQuintupleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfTwoBiomassAndOneHarvesterTripleStep [
+PCRegularModelTest >> testProgressionOfTwoBiomassAndOneHarvesterTripleStep [
 
 	harvester moveTo: cell.
 	cell biomass: 2.
@@ -450,7 +449,7 @@ PCCellTest >> testProgressionOfTwoBiomassAndOneHarvesterTripleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfTwoBiomassDoubleStep [
+PCRegularModelTest >> testProgressionOfTwoBiomassDoubleStep [
 
 	cell biomass: 2.
 	cell step.
@@ -460,7 +459,7 @@ PCCellTest >> testProgressionOfTwoBiomassDoubleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfTwoBiomassQuadrupleStep [
+PCRegularModelTest >> testProgressionOfTwoBiomassQuadrupleStep [
 
 	cell biomass: 2.
 	cell step.
@@ -471,7 +470,7 @@ PCCellTest >> testProgressionOfTwoBiomassQuadrupleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfTwoBiomassQuintupleStep [
+PCRegularModelTest >> testProgressionOfTwoBiomassQuintupleStep [
 
 	cell biomass: 2.
 	5 timesRepeat: [ cell step ].
@@ -479,7 +478,7 @@ PCCellTest >> testProgressionOfTwoBiomassQuintupleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfTwoBiomassTripleStep [
+PCRegularModelTest >> testProgressionOfTwoBiomassTripleStep [
 
 	cell biomass: 2.
 	cell step.
@@ -489,7 +488,7 @@ PCCellTest >> testProgressionOfTwoBiomassTripleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfZeroBiomass [
+PCRegularModelTest >> testProgressionOfZeroBiomass [
 
 	cell biomass: 0.
 	cell step.
@@ -497,7 +496,7 @@ PCCellTest >> testProgressionOfZeroBiomass [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfZeroBiomassAndOneHarvester [
+PCRegularModelTest >> testProgressionOfZeroBiomassAndOneHarvester [
 	
 	harvester moveTo: cell.
 	cell biomass: 0.
@@ -506,7 +505,7 @@ PCCellTest >> testProgressionOfZeroBiomassAndOneHarvester [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfZeroBiomassAndOneHarvesterDoubleStep [
+PCRegularModelTest >> testProgressionOfZeroBiomassAndOneHarvesterDoubleStep [
 
 	harvester moveTo: cell.
 	cell biomass: 0.
@@ -517,7 +516,7 @@ PCCellTest >> testProgressionOfZeroBiomassAndOneHarvesterDoubleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfZeroBiomassAndOneHarvesterTripleStep [
+PCRegularModelTest >> testProgressionOfZeroBiomassAndOneHarvesterTripleStep [
 	
 	harvester moveTo: cell.
 	cell biomass: 0.
@@ -528,7 +527,7 @@ PCCellTest >> testProgressionOfZeroBiomassAndOneHarvesterTripleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfZeroBiomassDoubleStep [
+PCRegularModelTest >> testProgressionOfZeroBiomassDoubleStep [
 
 	cell biomass: 0.
 	cell step.
@@ -538,7 +537,7 @@ PCCellTest >> testProgressionOfZeroBiomassDoubleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testProgressionOfZeroBiomassTripleStep [
+PCRegularModelTest >> testProgressionOfZeroBiomassTripleStep [
 
 	cell biomass: 0.
 	cell step.
@@ -548,7 +547,7 @@ PCCellTest >> testProgressionOfZeroBiomassTripleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testStep [ 
+PCRegularModelTest >> testStep [ 
 	
 	cell biomass: 3.
 	cell step.
@@ -560,7 +559,7 @@ PCCellTest >> testStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testStepWithHarvester [
+PCRegularModelTest >> testStepWithHarvester [
 
 	harvester moveTo: cell.
 	cell biomass: 3.
@@ -573,7 +572,7 @@ PCCellTest >> testStepWithHarvester [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testTripleStep [
+PCRegularModelTest >> testTripleStep [
 
 	cell
 		biomass: 3;
@@ -587,7 +586,7 @@ PCCellTest >> testTripleStep [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testUpdateNewbornBirdsHighBiomass [
+PCRegularModelTest >> testUpdateNewbornBirdsHighBiomass [
 
 	cell
 		biomass: 3;
@@ -596,7 +595,7 @@ PCCellTest >> testUpdateNewbornBirdsHighBiomass [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testUpdateNewbornBirdsLowBiomass [
+PCRegularModelTest >> testUpdateNewbornBirdsLowBiomass [
 
 	cell
 		biomass: 0;
@@ -605,7 +604,7 @@ PCCellTest >> testUpdateNewbornBirdsLowBiomass [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testUpdateNewbornBirdsWithHarvester [
+PCRegularModelTest >> testUpdateNewbornBirdsWithHarvester [
 	
 	harvester moveTo: cell.
 	cell updateNewbornBirds.
@@ -614,7 +613,7 @@ PCCellTest >> testUpdateNewbornBirdsWithHarvester [
 ]
 
 { #category : 'tests' }
-PCCellTest >> testUpdateUnvisitedCounter [
+PCRegularModelTest >> testUpdateUnvisitedCounter [
 
 	cell updateUnvisitedCounter.
 	

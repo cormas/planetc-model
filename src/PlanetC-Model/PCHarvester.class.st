@@ -17,7 +17,7 @@ PCHarvester >> collectBiomass [
 	<action>
 	| biomass |
 	biomass := self patch biomass.
-	biomass > 0 ifFalse: [ ^ self ].
+	biomass = 0 ifTrue: [ ^ self ].
 
 	(biomass = 1 or: [ biomass = 2 ]) ifTrue: [
 		harvestedBiomass := biomass.
