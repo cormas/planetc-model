@@ -41,12 +41,30 @@ PCCell >> incrementBiomass [
 ]
 
 { #category : 'accessing' }
-PCCell >> initialize [ 
+PCCell >> initialize [
+
 	super initialize.
 	biomass := (self randomBetween: 0 and: 3) rounded.
 	unvisitedCounter := 0.
 	numberOfNewborns := 0.
-	"zaokruziti biomassu do najblizeg broja"
+	isProtected := false.
+]
+
+{ #category : 'accessing' }
+PCCell >> isProtected [
+	^ isProtected
+]
+
+{ #category : 'as yet unclassified' }
+PCCell >> makeNotProtected [
+
+	isProtected := false.
+]
+
+{ #category : 'as yet unclassified' }
+PCCell >> makeProtected [
+
+	isProtected := true.
 ]
 
 { #category : 'accessing' }
@@ -75,10 +93,11 @@ PCCell >> povBoard [
 	^ CMPointOfView image: image
 ]
 
-{ #category : 'as yet unclassified' }
-PCCell >> setProtected: aBoolean [
+{ #category : 'accessing' }
+PCCell >> povProtected [
 
-	isProtected := aBoolean.
+	<pov>
+	^self isProtected ifTrue: [ CMPointOfView color: CMColor red ] ifFalse: [self pov].
 ]
 
 { #category : 'accessing' }

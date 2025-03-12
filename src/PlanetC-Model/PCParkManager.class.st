@@ -1,8 +1,6 @@
 Class {
 	#name : 'PCParkManager',
 	#superclass : 'CMAgent',
-	#traits : 'TCMLocated',
-	#classTraits : 'TCMLocated classTrait',
 	#instVars : [
 		'strategy'
 	],

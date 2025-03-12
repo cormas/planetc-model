@@ -8,12 +8,10 @@ Class {
 { #category : 'accessing' }
 MiddleBiomassStrategy >> sendParkManager [
 
-	| middleCells selectedCell|
+	| middleCells selectedCell |
 	middleCells := cells select: [ :cell | cell biomass = 2 ].
-	middleCells isEmpty ifTrue: [ ^self ].
+	middleCells isEmpty ifTrue: [ ^ self ].
 	3 timesRepeat: [
-    selectedCell := parkManager selectRandomlyFrom: middleCells.
-    parkManager moveTo: selectedCell.
-    parkManager patch setProtected: 1.
-].
+		selectedCell := parkManager selectRandomlyFrom: middleCells.
+		selectedCell makeProtected ]
 ]

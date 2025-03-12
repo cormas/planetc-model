@@ -31,7 +31,6 @@ PCParkManagerStrategy >> sendParkManager [
 PCParkManagerStrategy >> unprotectOldCells [
 
 	| protectedCells |
-	protectedCells :=  cells select: [ :cell | cell isProtected = 1 ].
-	protectedCells do: [ :cell | cell setProtected: 0 ].
-	
+	protectedCells := cells select: [ :cell | cell isProtected ].
+	protectedCells do: [ :cell | cell makeNotProtected ]
 ]
