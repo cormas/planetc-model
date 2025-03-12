@@ -50,40 +50,10 @@ PCModelFixture >> initialize [
 	super initialize.
 
 	model := PCModel new.
+	model class numberOfFamilies: self numberOfFamilies.
+
 	model randomSeed: 13.
-	self initializeGrid.
-
-	model createN: 3 entity: PCHarvester.
-	model createN: 2 entity: PCFamily.
-
-	"self harvester1 moveTo: self cell.
-	self harvester2 moveTo: self cell.
-	self harvester3 moveTo: self cell."
-
-	self family1 addChild: self harvester1.
-	self family2 addChildren: {
-			self harvester2.
-			self harvester3 }.
-
-	self family1
-		initializeCells: model cells
-		strategyClass: PCLowBiomassStrategy.
-	self family2
-		initializeCells: model cells
-		strategyClass: PCHighBiomassStrategy.
-
-	self family1 colorSymbol: #red.
-	self family2 colorSymbol: #blue
-]
-
-{ #category : 'initialization' }
-PCModelFixture >> initializeGrid [
-
-	model
-		createGridNumberOfRows: 4
-		numberOfColumns: 5
-		neighbourhood: 8
-		closed: true
+	model initStandard.
 ]
 
 { #category : 'accessing' }
@@ -92,21 +62,19 @@ PCModelFixture >> model [
 	^ model
 ]
 
+{ #category : 'accessing' }
+PCModelFixture >> numberOfFamilies [
+
+	self subclassResponsibility.
+]
+
 { #category : 'inspecting' }
 PCModelFixture >> openGrid [
 
-	<script: 'self new openGrid'>
 	| builder |
 	builder := CMR3SpaceDiagramBuilder new
 		           cormasModel: model;
 		           asPresenter.
 
 	builder open
-]
-
-{ #category : 'inspecting' }
-PCModelFixture >> openInspector [
-
-	<script: 'self new openInspector'>
-	self inspect
 ]

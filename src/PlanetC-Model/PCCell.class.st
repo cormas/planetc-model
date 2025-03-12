@@ -44,7 +44,6 @@ PCCell >> incrementBiomass [
 PCCell >> initialize [
 
 	super initialize.
-	biomass := (self randomBetween: 0 and: 3) rounded.
 	unvisitedCounter := 0.
 	numberOfNewborns := 0.
 	isProtected := false.

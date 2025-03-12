@@ -18,7 +18,7 @@ PCRegularModelTest >> setUp [
 	| fixture |
 	super setUp.
 
-	fixture := PCModelFixture new.
+	fixture := PCFiveFamiliesModelFixture new.
 
 	model := fixture model.
 	cell := fixture cell.
@@ -208,6 +208,12 @@ PCRegularModelTest >> testDoubleStep [
 		assert: cell biomass equals: 3;
 		assert: cell numberOfNewborns equals: 2;
 		assert: cell unvisitedCounter equals: 2
+]
+
+{ #category : 'tests' }
+PCRegularModelTest >> testInitialTotalBiomassIs30 [
+
+	self assert: model totalBiomass equals: 30
 ]
 
 { #category : 'tests' }

@@ -7,6 +7,9 @@ Class {
 		'families',
 		'parkManager'
 	],
+	#classInstVars : [
+		'numberOfFamilies'
+	],
 	#category : 'PlanetC-Model',
 	#package : 'PlanetC-Model'
 }
@@ -15,6 +18,47 @@ Class {
 PCModel class >> aboutThisModel [
 
 	^ ''
+]
+
+{ #category : 'as yet unclassified' }
+PCModel class >> initialBiomassArray [
+
+	^ #( 
+		1 1 2 1 1 
+		2 0 2 3 2
+		1 3 1 2 1
+		1 3 1 0 2 )
+]
+
+{ #category : 'as yet unclassified' }
+PCModel class >> initializeParameters [ 
+
+	super initializeParameters.
+	numberOfFamilies := 5.
+]
+
+{ #category : 'accessing' }
+PCModel class >> numberOfColumns [
+
+	^ 5
+]
+
+{ #category : 'accessing' }
+PCModel class >> numberOfFamilies [
+
+	^ numberOfFamilies
+]
+
+{ #category : 'accessing' }
+PCModel class >> numberOfFamilies: anObject [
+
+	numberOfFamilies := anObject
+]
+
+{ #category : 'accessing' }
+PCModel class >> numberOfRows [
+
+	^ 4
 ]
 
 { #category : 'as yet unclassified' }
@@ -46,11 +90,12 @@ PCModel >> initStandard [
 
 	<init>
 	self
-		createGridNumberOfRows: 4
-		numberOfColumns: 5
+		createGridNumberOfRows: self class numberOfRows
+		numberOfColumns: self class numberOfColumns
 		neighbourhood: 8
 		closed: true.
-
+		
+	self initializeBiomass.
 	self initializeCellImages.
 	self initializeFamiliesAndHarvesters.
 	self initializeParkManager
@@ -82,6 +127,19 @@ PCModel >> initialize [
 ]
 
 { #category : 'initialization' }
+PCModel >> initializeBiomass [
+
+	self initializeBiomassFromArray: self class initialBiomassArray 
+]
+
+{ #category : 'initialization' }
+PCModel >> initializeBiomassFromArray: aCollection [
+
+	aCollection withIndexDo: [ :number :i |
+		(cells at: i) biomass: number ]
+]
+
+{ #category : 'initialization' }
 PCModel >> initializeCellImages [
 
 	cells withIndexDo: [ :cell :index | 
@@ -91,13 +149,19 @@ PCModel >> initializeCellImages [
 { #category : 'initialization' }
 PCModel >> initializeFamiliesAndHarvesters [
 
-	| family harvester |
-	PCFamily availableColors do: [ :colorSymbol |
+	| family harvester colorSymbol harvestersPerFamily |
+	
+	harvestersPerFamily := 20 / self class numberOfFamilies. 
+	
+	1 to: self class numberOfFamilies do: [ :i |
+		colorSymbol := PCFamily availableColors at: i.
 		family := self newEntity: PCFamily.
 		family colorSymbol: colorSymbol.
-		family initializeCells: cells strategyClass: self randomHarvesterStrategyClass.
+		family
+			initializeCells: cells
+			strategyClass: self randomHarvesterStrategyClass.
 
-		1 to: 4 do: [ :i |
+		1 to: harvestersPerFamily do: [ :j |
 			harvester := self newEntity: PCHarvester.
 			family addChild: harvester ] ]
 ]
@@ -147,4 +211,19 @@ PCModel >> step [
 	self cells do: [ :cell | cell step ].
 	self families do: [ :family | family step ].
 	self parkManager do: [ :pManager | pManager step ].
+]
+
+{ #category : 'probes' }
+PCModel >> totalBiomass [
+
+	<probeNamed: 'Total biomass' color: '61C38D'>
+	^ cells sum: [ :cell | cell biomass ]
+]
+
+{ #category : 'probes' }
+PCModel >> totalHarvest [
+
+	<probeNamed: 'Total harvest' color: 'B90E0A'>
+		
+	^ harvesters sum: [ :harvester | harvester harvestedBiomass ]
 ]
