@@ -5,8 +5,9 @@ Class {
 		'colorSymbol',
 		'strategy'
 	],
-	#category : 'PlanetC-Model',
-	#package : 'PlanetC-Model'
+	#category : 'PlanetC-Model-Model',
+	#package : 'PlanetC-Model',
+	#tag : 'Model'
 }
 
 { #category : 'as yet unclassified' }

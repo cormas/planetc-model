@@ -6,8 +6,9 @@ Class {
 	#instVars : [
 		'harvestedBiomass'
 	],
-	#category : 'PlanetC-Model',
-	#package : 'PlanetC-Model'
+	#category : 'PlanetC-Model-Model',
+	#package : 'PlanetC-Model',
+	#tag : 'Model'
 }
 
 { #category : 'initialization' }

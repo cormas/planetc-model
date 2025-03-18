@@ -4,8 +4,9 @@ Class {
 	#classInstVars : [
 		'images'
 	],
-	#category : 'PlanetC-Model',
-	#package : 'PlanetC-Model'
+	#category : 'PlanetC-Model-UI',
+	#package : 'PlanetC-Model',
+	#tag : 'UI'
 }
 
 { #category : 'as yet unclassified' }
