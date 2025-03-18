@@ -50,10 +50,3 @@ PCFamily >> sendHarvesters [
 
 	strategy sendHarvesters.
 ]
-
-{ #category : 'accessing' }
-PCFamily >> step [
-
-	self sendHarvesters.
-	self collectBiomass.
-]

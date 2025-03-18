@@ -217,7 +217,8 @@ PCModel >> step [
 	<control>
 	self unprotectCells.
 	self cells do: [ :cell | cell step ].
-	self families do: [ :family | family step ].
+	self families do: [ :family | family sendHarvesters ].
+	self families do: [ :family | family collectBiomass ].
 	self parkManager protectCells.
 ]
 
