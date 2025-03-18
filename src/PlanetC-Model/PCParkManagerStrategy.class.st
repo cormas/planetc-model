@@ -23,15 +23,7 @@ PCParkManagerStrategy >> parkManager: aParkManager [
 ]
 
 { #category : 'accessing' }
-PCParkManagerStrategy >> sendParkManager [
+PCParkManagerStrategy >> protectCells [
 	
 	^ self subclassResponsibility.
-]
-
-{ #category : 'accessing' }
-PCParkManagerStrategy >> unprotectOldCells [
-
-	| protectedCells |
-	protectedCells := cells select: [ :cell | cell isProtected ].
-	protectedCells do: [ :cell | cell makeNotProtected ]
 ]

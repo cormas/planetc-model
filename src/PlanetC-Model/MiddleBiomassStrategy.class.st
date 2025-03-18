@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'accessing' }
-MiddleBiomassStrategy >> sendParkManager [
+MiddleBiomassStrategy >> protectCells [
 
 	| middleCells selectedCell |
 	middleCells := cells select: [ :cell | cell biomass = 2 ].

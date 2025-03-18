@@ -209,9 +209,10 @@ PCModel >> randomParkManagerStrategyClass [
 PCModel >> step [
 
 	<control>
+	self unprotectCells.
 	self cells do: [ :cell | cell step ].
 	self families do: [ :family | family step ].
-	self parkManager do: [ :pManager | pManager step ].
+	self parkManager do: [ :manager | manager protectCells ].
 ]
 
 { #category : 'probes' }
@@ -226,4 +227,10 @@ PCModel >> totalHarvest [
 
 	<probeNamed: 'Total harvest' color: 'B90E0A'>
 	^ harvesters sum: [ :harvester | harvester harvestedBiomass ]
+]
+
+{ #category : 'as yet unclassified' }
+PCModel >> unprotectCells [
+
+	cells do: [ :cell | cell makeNotProtected ]
 ]
