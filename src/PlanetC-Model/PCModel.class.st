@@ -195,7 +195,7 @@ PCModel >> parkManager [
 { #category : 'as yet unclassified' }
 PCModel >> randomHarvesterStrategyClass [
 
-	^ self selectRandomlyFrom: PCHarvesterStrategy subclasses
+	^ self selectRandomlyFrom: PCFamilyStrategy subclasses
 ]
 
 { #category : 'as yet unclassified' }

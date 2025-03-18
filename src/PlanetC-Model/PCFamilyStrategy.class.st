@@ -1,5 +1,5 @@
 Class {
-	#name : 'PCHarvesterStrategy',
+	#name : 'PCFamilyStrategy',
 	#superclass : 'Object',
 	#instVars : [
 		'cells',
@@ -10,25 +10,25 @@ Class {
 }
 
 { #category : 'accessing' }
-PCHarvesterStrategy >> cells: aCollection [
+PCFamilyStrategy >> cells: aCollection [
 
 	cells := aCollection
 ]
 
 { #category : 'accessing' }
-PCHarvesterStrategy >> family: aFamily [
+PCFamilyStrategy >> family: aFamily [
 
 	family := aFamily
 ]
 
 { #category : 'as yet unclassified' }
-PCHarvesterStrategy >> sendHarvesters [
+PCFamilyStrategy >> sendHarvesters [
 
 	self subclassResponsibility.
 ]
 
 { #category : 'sorting' }
-PCHarvesterStrategy >> sortCellsFromHighToLow [
+PCFamilyStrategy >> sortCellsFromHighToLow [
 
 	^ cells sorted: [ :a :b | a biomass > b biomass ]
 ]
