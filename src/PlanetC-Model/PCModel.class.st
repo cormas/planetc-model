@@ -5,7 +5,7 @@ Class {
 		'cells',
 		'harvesters',
 		'families',
-		'parkManager'
+		'parkManagers'
 	],
 	#classInstVars : [
 		'numberOfFamilies'
@@ -124,7 +124,7 @@ PCModel >> initialize [
 	cells := OrderedCollection new.
 	harvesters := OrderedCollection new.
 	families := OrderedCollection new.
-	parkManager := OrderedCollection new.
+	parkManagers := OrderedCollection new.
 ]
 
 { #category : 'initialization' }
@@ -189,8 +189,14 @@ PCModel >> open [
 
 { #category : 'accessing' }
 PCModel >> parkManager [
+
+	^ parkManagers first
+]
+
+{ #category : 'accessing' }
+PCModel >> parkManagers [
 	<getterFor: #PCParkManager>
-	^ parkManager 
+	^ parkManagers 
 ]
 
 { #category : 'as yet unclassified' }
@@ -212,7 +218,7 @@ PCModel >> step [
 	self unprotectCells.
 	self cells do: [ :cell | cell step ].
 	self families do: [ :family | family step ].
-	self parkManager do: [ :manager | manager protectCells ].
+	self parkManager protectCells.
 ]
 
 { #category : 'probes' }
