@@ -23,25 +23,25 @@ PCCell >> biomass: newBiomass [
 	biomass := newBiomass.
 ]
 
-{ #category : 'accessing' }
+{ #category : 'private' }
 PCCell >> decrementBiomass [
 
 	biomass := 0 max: biomass - 1
 ]
 
-{ #category : 'accessing' }
+{ #category : 'testing' }
 PCCell >> hasHarvesters [
 	
 	^ self hasOccupantsOfClass: PCHarvester.
 ]
 
-{ #category : 'accessing' }
+{ #category : 'private' }
 PCCell >> incrementBiomass [
 
 	biomass := 3 min: biomass + 1
 ]
 
-{ #category : 'accessing' }
+{ #category : 'initialization' }
 PCCell >> initialize [
 
 	super initialize.
@@ -55,13 +55,13 @@ PCCell >> isProtected [
 	^ isProtected
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PCCell >> makeNotProtected [
 
 	isProtected := false.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PCCell >> makeProtected [
 
 	isProtected := true.
@@ -72,13 +72,13 @@ PCCell >> numberOfNewborns [
 	^ numberOfNewborns 
 ]
 
-{ #category : 'accessing' }
+{ #category : 'pov' }
 PCCell >> pov [ 
 	<pov>
 	^ CMPointOfView color: (PCColor biomassColors at: biomass + 1)
 ]
 
-{ #category : 'accessing' }
+{ #category : 'pov' }
 PCCell >> povBirds [
 	<pov>
 	| color | 
@@ -87,20 +87,20 @@ PCCell >> povBirds [
 		color: color
 ]
 
-{ #category : 'accessing' }
+{ #category : 'pov' }
 PCCell >> povBoard [
 	<pov>
 	^ CMPointOfView image: image
 ]
 
-{ #category : 'accessing' }
+{ #category : 'pov' }
 PCCell >> povProtected [
 
 	<pov>
 	^self isProtected ifTrue: [ CMPointOfView color: CMColor red ] ifFalse: [self pov].
 ]
 
-{ #category : 'accessing' }
+{ #category : 'step' }
 PCCell >> step [
 	self updateUnvisitedCounter.
 	self updateBiomass.
@@ -113,7 +113,7 @@ PCCell >> unvisitedCounter [
 	^ unvisitedCounter 
 ]
 
-{ #category : 'accessing' }
+{ #category : 'step' }
 PCCell >> updateBiomass [
 
 	<action>
@@ -131,7 +131,7 @@ PCCell >> updateBiomass [
 	sumOfHarvestedBiomass = 3 ifTrue: [ self incrementBiomass ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'step' }
 PCCell >> updateNewbornBirds [
 	
 	| occupationProportion numberOfUnoccupiedNeighbours |
@@ -152,7 +152,7 @@ PCCell >> updateNewbornBirds [
 	
 ]
 
-{ #category : 'accessing' }
+{ #category : 'step' }
 PCCell >> updateUnvisitedCounter [
 
 	unvisitedCounter := self hasHarvesters
@@ -160,7 +160,7 @@ PCCell >> updateUnvisitedCounter [
 		                    ifFalse: [ unvisitedCounter + 1 ].
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'image' }
 PCCell >> useImage: aForm [
 
 	image := aForm
