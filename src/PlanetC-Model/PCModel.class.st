@@ -68,25 +68,25 @@ PCModel class >> prefix [
 	^ 'PC'
 ]
 
-{ #category : 'initialization' }
+{ #category : 'accessing' }
 PCModel >> cells [ 
 	<getterFor: #PCCell >
 	^ cells 
 ]
 
-{ #category : 'initialization' }
+{ #category : 'accessing' }
 PCModel >> families [
 	<getterFor: #PCFamily >
 	^ families 
 ]
 
-{ #category : 'initialization' }
+{ #category : 'accessing' }
 PCModel >> harvesters [
 	<getterFor: #PCHarvester >
 	^ harvesters 
 ]
 
-{ #category : 'initialization' }
+{ #category : 'init' }
 PCModel >> initStandard [
 
 	<init>
@@ -102,7 +102,7 @@ PCModel >> initStandard [
 	self initializeParkManager
 ]
 
-{ #category : 'initialization' }
+{ #category : 'init' }
 PCModel >> initStandardPlusBases [
 
 	<init>
@@ -177,7 +177,7 @@ PCModel >> initializeParkManager [
 		strategyClass: self randomParkManagerStrategyClass 
 ]
 
-{ #category : 'initialization' }
+{ #category : 'as yet unclassified' }
 PCModel >> open [
 
 	| tmp1 tmp2 |
@@ -187,7 +187,7 @@ PCModel >> open [
 	tmp1 open
 ]
 
-{ #category : 'initialization' }
+{ #category : 'accessing' }
 PCModel >> parkManager [
 	<getterFor: #PCParkManager>
 	^ parkManager 
@@ -205,7 +205,7 @@ PCModel >> randomParkManagerStrategyClass [
 	^ self selectRandomlyFrom: PCParkManagerStrategy subclasses
 ]
 
-{ #category : 'initialization' }
+{ #category : 'control' }
 PCModel >> step [
 
 	<control>
@@ -225,6 +225,5 @@ PCModel >> totalBiomass [
 PCModel >> totalHarvest [
 
 	<probeNamed: 'Total harvest' color: 'B90E0A'>
-		
 	^ harvesters sum: [ :harvester | harvester harvestedBiomass ]
 ]

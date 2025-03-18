@@ -11,7 +11,7 @@ Class {
 	#tag : 'Model'
 }
 
-{ #category : 'initialization' }
+{ #category : 'actions' }
 PCHarvester >> collectBiomass [
 	"change logic a little bit acording to the rules"
 
@@ -41,13 +41,6 @@ PCHarvester >> initialize [
 	harvestedBiomass := 0.
 ]
 
-{ #category : 'initialization' }
-PCHarvester >> moveRandomly [
-    <action>
-    self randomWalkConstrainedBy: [ :cell |
-        (cell hasOccupantsOfClass: self class) not ]
-]
-
 { #category : 'pov' }
 PCHarvester >> pov [
     <pov>
@@ -63,10 +56,4 @@ PCHarvester >> povImage [
     ^ CMPointOfView
         image: (PCImages pieces at: self group colorSymbol)
         size: 0.5
-]
-
-{ #category : 'initialization' }
-PCHarvester >> step [
-
-	self collectBiomass.
 ]
