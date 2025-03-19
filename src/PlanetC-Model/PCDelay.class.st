@@ -47,14 +47,14 @@ PCDelay >> initialize [
 PCDelay >> start [
 
 	isTimerActive := true.
-	[ duration > 0 and: isTimerActive ] whileTrue: [
-		(Delay forSeconds: 1) wait.
-		self duration: duration - 1 ] fork.
+	[[ duration > 0 and: isTimerActive ] whileTrue: [
+		1 second wait.
+		duration traceCr.
+		self duration: duration - 1 ]] fork
 ]
 
 { #category : 'accessing' }
 PCDelay >> stop [
 
-	isTimerActive := false.
-	
+	[isTimerActive := false] fork.
 ]
