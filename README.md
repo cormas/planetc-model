@@ -3,6 +3,6 @@
 ```st
 Metacello new
       baseline: 'PlanetC';
-      repository: 'github://cormas/planetc-model';
+      repository: 'github://cormas/planetc-model:main';
       load
 ```
