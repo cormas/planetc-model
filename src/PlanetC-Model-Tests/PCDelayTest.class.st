@@ -4,8 +4,8 @@ Class {
 	#instVars : [
 		'timer'
 	],
-	#category : 'PlanetC-Model-Test',
-	#package : 'PlanetC-Model-Test'
+	#category : 'PlanetC-Model-Tests',
+	#package : 'PlanetC-Model-Tests'
 }
 
 { #category : 'tests' }

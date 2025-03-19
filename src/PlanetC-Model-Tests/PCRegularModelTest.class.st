@@ -8,8 +8,8 @@ Class {
 		'harvester2',
 		'harvester3'
 	],
-	#category : 'PlanetC-Model-Test',
-	#package : 'PlanetC-Model-Test'
+	#category : 'PlanetC-Model-Tests',
+	#package : 'PlanetC-Model-Tests'
 }
 
 { #category : 'running' }

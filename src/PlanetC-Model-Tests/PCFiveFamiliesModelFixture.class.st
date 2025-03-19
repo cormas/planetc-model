@@ -1,8 +1,8 @@
 Class {
 	#name : 'PCFiveFamiliesModelFixture',
 	#superclass : 'PCModelFixture',
-	#category : 'PlanetC-Model-Test',
-	#package : 'PlanetC-Model-Test'
+	#category : 'PlanetC-Model-Tests',
+	#package : 'PlanetC-Model-Tests'
 }
 
 { #category : 'accessing' }
