@@ -6,9 +6,8 @@ Class {
 		'workingAgents',
 		'isTimerActive'
 	],
-	#category : 'PlanetC-Model-Model',
-	#package : 'PlanetC-Model',
-	#tag : 'Model'
+	#category : 'PlanetC-Model',
+	#package : 'PlanetC-Model'
 }
 
 { #category : 'accessing' }
@@ -50,7 +49,7 @@ PCDelay >> start [
 	isTimerActive := true.
 	[ duration > 0 and: isTimerActive ] whileTrue: [
 		(Delay forSeconds: 1) wait.
-		duration := duration - 1 ] fork.
+		self duration: duration - 1 ] fork.
 ]
 
 { #category : 'accessing' }
