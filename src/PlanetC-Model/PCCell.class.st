@@ -1,6 +1,6 @@
 Class {
 	#name : 'PCCell',
-	#superclass : 'CMSpatialEntityElement',
+	#superclass : 'CMCell',
 	#instVars : [
 		'biomass',
 		'isProtected',
