@@ -1,8 +1,6 @@
 Class {
 	#name : 'PCHarvester',
 	#superclass : 'CMAgent',
-	#traits : 'TCMLocated',
-	#classTraits : 'TCMLocated classTrait',
 	#instVars : [
 		'harvestedBiomass'
 	],

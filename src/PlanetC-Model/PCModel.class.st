@@ -1,12 +1,6 @@
 Class {
 	#name : 'PCModel',
 	#superclass : 'CMAbstractModel',
-	#instVars : [
-		'cells',
-		'harvesters',
-		'families',
-		'parkManagers'
-	],
 	#classInstVars : [
 		'numberOfFamilies'
 	],
@@ -69,21 +63,15 @@ PCModel class >> prefix [
 ]
 
 { #category : 'accessing' }
-PCModel >> cells [ 
-	<getterFor: #PCCell >
-	^ cells 
-]
-
-{ #category : 'accessing' }
 PCModel >> families [
-	<getterFor: #PCFamily >
-	^ families 
+
+	^ self @@ PCFamily
 ]
 
 { #category : 'accessing' }
 PCModel >> harvesters [
-	<getterFor: #PCHarvester >
-	^ harvesters 
+
+	^ self @@ PCHarvester
 ]
 
 { #category : 'init' }
@@ -118,16 +106,6 @@ PCModel >> initStandardPlusBases [
 ]
 
 { #category : 'initialization' }
-PCModel >> initialize [
-
-	super initialize.
-	cells := OrderedCollection new.
-	harvesters := OrderedCollection new.
-	families := OrderedCollection new.
-	parkManagers := OrderedCollection new.
-]
-
-{ #category : 'initialization' }
 PCModel >> initializeBiomass [
 
 	self initializeBiomassFromArray: self class initialBiomassArray 
@@ -137,13 +115,13 @@ PCModel >> initializeBiomass [
 PCModel >> initializeBiomassFromArray: aCollection [
 
 	aCollection withIndexDo: [ :number :i |
-		(cells at: i) biomass: number ]
+		(self cells at: i) biomass: number ]
 ]
 
 { #category : 'initialization' }
 PCModel >> initializeCellImages [
 
-	cells withIndexDo: [ :cell :index | 
+	self cells withIndexDo: [ :cell :index | 
 		cell useImage: (PCImages cells at: index) ]
 ]
 
@@ -159,7 +137,7 @@ PCModel >> initializeFamiliesAndHarvesters [
 		family := self newEntity: PCFamily.
 		family colorSymbol: colorSymbol.
 		family
-			initializeCells: cells
+			initializeCells: self cells
 			strategyClass: self randomHarvesterStrategyClass.
 
 		1 to: harvestersPerFamily do: [ :j |
@@ -173,7 +151,7 @@ PCModel >> initializeParkManager [
 	| newParkManager |
 	newParkManager := self newEntity: PCParkManager.
 	newParkManager
-		initializeCells: cells
+		initializeCells: self cells
 		strategyClass: self randomParkManagerStrategyClass 
 ]
 
@@ -190,13 +168,13 @@ PCModel >> open [
 { #category : 'accessing' }
 PCModel >> parkManager [
 
-	^ parkManagers first
+	^ self parkManagers first
 ]
 
 { #category : 'accessing' }
 PCModel >> parkManagers [
-	<getterFor: #PCParkManager>
-	^ parkManagers 
+
+	^ self @@ PCParkManager
 ]
 
 { #category : 'as yet unclassified' }
@@ -226,18 +204,18 @@ PCModel >> step [
 PCModel >> totalBiomass [
 
 	<probeNamed: 'Total biomass' color: '61C38D'>
-	^ cells sum: [ :cell | cell biomass ]
+	^ self cells sum: [ :cell | cell biomass ]
 ]
 
 { #category : 'probes' }
 PCModel >> totalHarvest [
 
 	<probeNamed: 'Total harvest' color: 'B90E0A'>
-	^ harvesters sum: [ :harvester | harvester harvestedBiomass ]
+	^ self harvesters sum: [ :harvester | harvester harvestedBiomass ]
 ]
 
 { #category : 'as yet unclassified' }
 PCModel >> unprotectCells [
 
-	cells do: [ :cell | cell makeNotProtected ]
+	self cells do: [ :cell | cell makeNotProtected ]
 ]
