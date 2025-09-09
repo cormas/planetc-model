@@ -87,7 +87,10 @@ PCModel >> initStandard [
 	self initializeBiomass.
 	self initializeCellImages.
 	self initializeFamiliesAndHarvesters.
-	self initializeParkManager
+	self initializeParkManager.
+	
+	PCCell activePovSelector: #povBoard.
+	PCHarvester activePovSelector: #povImage
 ]
 
 { #category : 'init' }
