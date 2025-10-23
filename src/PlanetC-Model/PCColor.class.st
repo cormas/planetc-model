@@ -77,3 +77,7 @@ PCColor class >> yellowPiece [
 	<script: 'self yellowPiece inspect'>
 	^ Color yellow
 ]
+
+{ #category : 'see class side' }
+PCColor >> seeClassSide [
+]

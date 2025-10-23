@@ -75,7 +75,10 @@ PCCell >> numberOfNewborns [
 { #category : 'pov' }
 PCCell >> pov [ 
 	<pov>
-	^ CMPointOfView color: (PCColor biomassColors at: biomass + 1)
+	^ CMPointOfView new
+		color: (PCColor biomassColors at: biomass + 1);
+		borderWidth: 0;
+		yourself
 ]
 
 { #category : 'pov' }
@@ -83,21 +86,32 @@ PCCell >> povBirds [
 	<pov>
 	| color | 
 	color := self colorAttribute: #numberOfNewborns min: 0  max: 2 color: CMColor gold. 
-	^ CMPointOfView 
-		color: color
+	
+	^ CMPointOfView new
+		color: color;
+		borderWidth: 0;
+		yourself
 ]
 
 { #category : 'pov' }
 PCCell >> povBoard [
 	<pov>
-	^ CMPointOfView image: image
+	^ CMPointOfView new
+		tile: image;
+		borderWidth: 0;
+		yourself
 ]
 
 { #category : 'pov' }
 PCCell >> povProtected [
 
 	<pov>
-	^self isProtected ifTrue: [ CMPointOfView color: CMColor red ] ifFalse: [self pov].
+	self isProtected ifFalse: [ ^ self pov ].
+
+	^ CMPointOfView new
+		color: CMColor red;
+		borderWidth: 0;
+		yourself
 ]
 
 { #category : 'step' }

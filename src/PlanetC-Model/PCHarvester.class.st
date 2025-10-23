@@ -15,15 +15,15 @@ PCHarvester >> collectBiomass [
 
 	<action>
 	| biomass |
-	biomass := self patch biomass.
+	biomass := self cell biomass.
 	biomass = 0 ifTrue: [ ^ self ].
 
 	(biomass = 1 or: [ biomass = 2 ]) ifTrue: [
 		harvestedBiomass := biomass.
-		self patch biomass: self patch biomass - biomass.
+		self cell biomass: self cell biomass - biomass.
 		^ self ].
 	harvestedBiomass := harvestedBiomass + 2.
-	self patch biomass: self patch biomass - 2
+	self cell biomass: self cell biomass - 2
 ]
 
 { #category : 'accessing' }
@@ -52,6 +52,6 @@ PCHarvester >> pov [
 PCHarvester >> povImage [
     <pov>
     ^ CMPointOfView
-        image: (PCImages pieces at: self group colorSymbol)
+        tile: (PCTileset pieces at: self group colorSymbol)
         size: 0.5
 ]

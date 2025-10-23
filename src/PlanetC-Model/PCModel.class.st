@@ -10,12 +10,6 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PCModel class >> aboutThisModel [
-
-	^ ''
-]
-
-{ #category : 'as yet unclassified' }
 PCModel class >> initialBiomassArray [
 
 	^ #( 
@@ -30,6 +24,12 @@ PCModel class >> initializeParameters [
 
 	super initializeParameters.
 	numberOfFamilies := 5.
+]
+
+{ #category : 'model - metadata' }
+PCModel class >> modelName [
+
+	^ 'Planet C'
 ]
 
 { #category : 'accessing' }
@@ -125,7 +125,7 @@ PCModel >> initializeBiomassFromArray: aCollection [
 PCModel >> initializeCellImages [
 
 	self cells withIndexDo: [ :cell :index | 
-		cell useImage: (PCImages cells at: index) ]
+		cell useImage: (PCTileset cells at: index) ]
 ]
 
 { #category : 'initialization' }

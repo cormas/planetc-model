@@ -20,7 +20,7 @@ PCFamily class >> availableColors [
 PCFamily >> collectBiomass [ 
 	
 	children
-		select: [ :harvester | harvester patch isNotNil ]
+		select: [ :harvester | harvester cell isNotNil ]
 		thenDo: [ :childHarvester | childHarvester collectBiomass ]
 ]
 
