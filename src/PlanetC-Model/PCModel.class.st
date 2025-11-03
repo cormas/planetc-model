@@ -75,6 +75,13 @@ PCModel >> harvesters [
 ]
 
 { #category : 'init' }
+PCModel >> initSingleFamily [
+	<init>
+	self class numberOfFamilies: 1.
+	self initStandard
+]
+
+{ #category : 'init' }
 PCModel >> initStandard [
 
 	<init>
@@ -91,21 +98,6 @@ PCModel >> initStandard [
 	
 	PCCell activePovSelector: #povBoard.
 	PCHarvester activePovSelector: #povImage
-]
-
-{ #category : 'init' }
-PCModel >> initStandardPlusBases [
-
-	<init>
-	self
-		createGridNumberOfRows: 6
-		numberOfColumns: 7
-		neighbourhood: 8
-		closed: true.
-
-	self initializeCellImages.
-	self initializeFamiliesAndHarvesters.
-	self initializeParkManager
 ]
 
 { #category : 'initialization' }
