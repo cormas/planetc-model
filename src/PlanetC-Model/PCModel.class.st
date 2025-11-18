@@ -85,6 +85,9 @@ PCModel >> initSingleFamily [
 PCModel >> initStandard [
 
 	<init>
+	"To reset the number of families"
+	self class initializeParameters.
+	
 	self
 		createGridNumberOfRows: self class numberOfRows
 		numberOfColumns: self class numberOfColumns
