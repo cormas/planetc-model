@@ -86,6 +86,7 @@ PCModel >> initStandard [
 
 	<init>
 	"To reset the number of families"
+	self makeAgentsScatteredInCells.
 	self class initializeParameters.
 	
 	self
