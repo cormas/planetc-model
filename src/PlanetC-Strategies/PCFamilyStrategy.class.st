@@ -5,9 +5,8 @@ Class {
 		'cells',
 		'family'
 	],
-	#category : 'PlanetC-Model-Strategies',
-	#package : 'PlanetC-Model',
-	#tag : 'Strategies'
+	#category : 'PlanetC-Strategies',
+	#package : 'PlanetC-Strategies'
 }
 
 { #category : 'accessing' }

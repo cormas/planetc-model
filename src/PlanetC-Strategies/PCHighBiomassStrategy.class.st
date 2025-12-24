@@ -1,9 +1,8 @@
 Class {
 	#name : 'PCHighBiomassStrategy',
 	#superclass : 'PCFamilyStrategy',
-	#category : 'PlanetC-Model-Strategies',
-	#package : 'PlanetC-Model',
-	#tag : 'Strategies'
+	#category : 'PlanetC-Strategies',
+	#package : 'PlanetC-Strategies'
 }
 
 { #category : 'accessing' }
