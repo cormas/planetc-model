@@ -19,13 +19,6 @@ PCModel class >> initialBiomassArray [
 		1 3 1 0 2 )
 ]
 
-{ #category : 'as yet unclassified' }
-PCModel class >> initializeParameters [ 
-
-	super initializeParameters.
-	numberOfFamilies := 5.
-]
-
 { #category : 'model - metadata' }
 PCModel class >> modelName [
 
@@ -40,7 +33,7 @@ PCModel class >> numberOfColumns [
 
 { #category : 'accessing' }
 PCModel class >> numberOfFamilies [
-
+	<parameterIntegerDefault: 5>
 	^ numberOfFamilies
 ]
 
@@ -87,7 +80,6 @@ PCModel >> initStandard [
 	<init>
 	"To reset the number of families"
 	self makeAgentsScatteredInCells.
-	self class initializeParameters.
 	
 	self
 		createGridNumberOfRows: self class numberOfRows
