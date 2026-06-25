@@ -1,7 +1,7 @@
 Class {
 	#name : 'PCModel',
-	#superclass : 'CMAbstractModel',
-	#classInstVars : [
+	#superclass : 'CMModel',
+	#instVars : [
 		'numberOfFamilies'
 	],
 	#category : 'PlanetC-Model-Model',
@@ -32,18 +32,6 @@ PCModel class >> numberOfColumns [
 ]
 
 { #category : 'accessing' }
-PCModel class >> numberOfFamilies [
-	<parameterIntegerDefault: 5>
-	^ numberOfFamilies
-]
-
-{ #category : 'accessing' }
-PCModel class >> numberOfFamilies: anObject [
-
-	numberOfFamilies := anObject
-]
-
-{ #category : 'accessing' }
 PCModel class >> numberOfRows [
 
 	^ 4
@@ -70,7 +58,7 @@ PCModel >> harvesters [
 { #category : 'init' }
 PCModel >> initSingleFamily [
 	<init>
-	self class numberOfFamilies: 1.
+	numberOfFamilies := 1.
 	self initStandard
 ]
 
@@ -121,9 +109,9 @@ PCModel >> initializeFamiliesAndHarvesters [
 
 	| family harvester colorSymbol harvestersPerFamily |
 	
-	harvestersPerFamily := 20 / self class numberOfFamilies. 
+	harvestersPerFamily := 20 / self numberOfFamilies. 
 	
-	1 to: self class numberOfFamilies do: [ :i |
+	1 to: self numberOfFamilies do: [ :i |
 		colorSymbol := PCFamily availableColors at: i.
 		family := self newEntity: PCFamily.
 		family colorSymbol: colorSymbol.
@@ -144,6 +132,18 @@ PCModel >> initializeParkManager [
 	newParkManager
 		initializeCells: self cells
 		strategyClass: self randomParkManagerStrategyClass 
+]
+
+{ #category : 'accessing' }
+PCModel >> numberOfFamilies [
+	<parameterIntegerDefault: 5>
+	^ numberOfFamilies
+]
+
+{ #category : 'accessing' }
+PCModel >> numberOfFamilies: anObject [
+
+	numberOfFamilies := anObject
 ]
 
 { #category : 'as yet unclassified' }

@@ -50,7 +50,7 @@ PCModelFixture >> initialize [
 	super initialize.
 
 	model := PCModel new.
-	model class numberOfFamilies: self numberOfFamilies.
+	model numberOfFamilies: self numberOfFamilies.
 
 	model randomSeed: 13.
 	model initStandard.

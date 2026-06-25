@@ -85,7 +85,12 @@ PCCell >> pov [
 PCCell >> povBirds [
 	<pov>
 	| color | 
-	color := self colorAttribute: #numberOfNewborns min: 0  max: 2 color: CMColor gold. 
+	
+	color := CMColor
+		colorValue: self numberOfNewborns
+		min: 0
+		max: 2
+		color: CMColor gold. 
 	
 	^ CMPointOfView new
 		color: color;
