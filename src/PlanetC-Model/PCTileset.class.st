@@ -1,8 +1,6 @@
 Class {
 	#name : 'PCTileset',
-	#superclass : 'Object',
-	#traits : 'TCMTileset',
-	#classTraits : 'TCMTileset classTrait',
+	#superclass : 'CMTileset',
 	#category : 'PlanetC-Model-UI',
 	#package : 'PlanetC-Model',
 	#tag : 'UI'
