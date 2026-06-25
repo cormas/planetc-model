@@ -17,8 +17,10 @@ BaselineOfPlanetC >> baseline: spec [
 		
 		"Packages"
 		spec
+			package: 'PlanetC-Strategies';
+		
 			package: 'PlanetC-Model'
-			with: [ spec requires: #('CormasGameServer') ];
+			with: [ spec requires: #('PlanetC-Strategies' 'CormasGameServer') ];
 
 			package: 'PlanetC-Model-Tests'
 			with: [ spec requires: #( 'PlanetC-Model' ) ] ]
